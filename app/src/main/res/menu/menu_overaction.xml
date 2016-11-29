@@ -6,7 +6,7 @@
         android:id="@+id/ab_search"
         android:orderInCategory="80"
         android:title="搜索"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/search"
         app:showAsAction="ifRoom"/>
 
     <item

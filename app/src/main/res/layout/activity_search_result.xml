@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_search_result"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.fengdeyu.xuanyue_reader.activity.SearchResultActivity">
+
+    <LinearLayout
+        android:id="@+id/app_search_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#8b0000"
+        android:orientation="horizontal"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:src="@mipmap/back" />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:background="#555555"
+            />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="264"
+            android:background="@null"
+            android:gravity="start|center_vertical"
+            android:hint="输入查询的关键字"
+            android:textColorHint="#cccccc"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:background="#555555"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/search"
+            />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/bookitem_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+
+
+
+
+    </ScrollView>
+
+</LinearLayout>

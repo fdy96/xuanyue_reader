@@ -60,6 +60,13 @@ public class BookcaseFragment extends Fragment {
         bookItemBean2.bookcontent="第二百一十五章 我是你爸爸啊";
 
         mList.add(bookItemBean2);
+
+        BookItemBean bookItemBean3=new BookItemBean();
+        bookItemBean3.bookTitle="岁月是朵双生花";
+        bookItemBean3.bookAuthor="作者:唐七公子";
+        bookItemBean3.bookcontent="第二百一十五章 我是你爸爸啊";
+
+        mList.add(bookItemBean3);
     }
 
 }

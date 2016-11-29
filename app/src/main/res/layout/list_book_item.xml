@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_book_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/iv_book_icon"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:background="@mipmap/ic_launcher"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="太浩"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="作者:无极书虫"
+            android:textSize="12sp"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/tv_book_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="第一千二百八十章 我是你爸爸啊"
+            android:textSize="12sp"
+            android:maxLines="1"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#dddddd"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.fengdeyu.xuanyue_reader.activity;
 
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -108,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.ab_search:
+                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+
         }
         return super.onOptionsItemSelected(item);
     }

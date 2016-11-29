@@ -104,8 +104,7 @@
                 android:text="注册"
                 android:textSize="15sp"
                 android:textColor="@android:color/white"
-                android:background="@mipmap/login_btn_bg"
-                android:backgroundTint="#8b0000"
+                android:background="#8b0000"
 
                 />
             <Button

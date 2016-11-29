@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".activity.BookIntroActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#8b0000"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="8dp"
+            android:src="@mipmap/back"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+
+        <TextView
+            android:layout_width="122dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:text="书籍详情"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_weight="1" />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|center_vertical"
+            android:padding="8dp"
+            android:text="缓存全本"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_book_icon"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/book_icon"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="太浩"
+                    android:textSize="22sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_book_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="作者:无极书虫"
+                    />
+                <TextView
+                    android:id="@+id/tv_book_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:layout_marginTop="8dp"
+                    android:text="最新章节:同人:如果没有梦蝶的世界34"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp">
+
+            <Button
+                android:background="#8b0000"
+                android:layout_width="140dp"
+                android:layout_height="45dp"
+                android:text="加入书架"
+                android:layout_weight="1"
+                android:textColor="#ffffff"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:layout_weight="2"
+
+                />
+
+            <Button
+                android:background="#8b0000"
+                android:layout_width="140dp"
+                android:layout_height="45dp"
+                android:text="开始阅读"
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:text="太浩者，天也。因少时的一场仙缘梦游大千，少年发下道心走上求道寻真的修道之路……海有多深，唯鲲鱼可知；天有多高，唯鹏鸟可明，世界有多大，唯我群星皓天万界。扶摇直上九万里，气动风云九重天。即便是蝼蚁之辈，也有那证道混元之心！"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

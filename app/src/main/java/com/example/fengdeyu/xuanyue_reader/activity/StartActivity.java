@@ -1,5 +1,6 @@
 package com.example.fengdeyu.xuanyue_reader.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -8,7 +9,7 @@ import android.os.Bundle;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
