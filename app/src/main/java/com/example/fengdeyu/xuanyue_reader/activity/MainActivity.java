@@ -14,11 +14,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.adapter.FragmentAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
 import com.example.fengdeyu.xuanyue_reader.fragment.BookcaseFragment;
+import com.example.fengdeyu.xuanyue_reader.fragment.HomeFindFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+
+    private TextView tv_toLogin;
 
     private List<BookItemBean> bookItemList;
 
@@ -52,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        View drawView=navigationView.inflateHeaderView(R.layout.navigation_header);
+        tv_toLogin= (TextView) drawView.findViewById(R.id.tv_toLogin);
+        tv_toLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                MainActivity.this.finish();
+            }
+        });
 
         initViewPager();
 
@@ -86,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        fragments.add(new BookcaseFragment());//加载发现界面
+        fragments.add(new HomeFindFragment());//加载发现界面
 
         FragmentAdapter mFragmentAdapteradapter=
                 new FragmentAdapter(getSupportFragmentManager(),fragments,titles);
@@ -96,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
 
         mTabLayout.setTabsFromPagerAdapter(mFragmentAdapteradapter);
+
 
 
 

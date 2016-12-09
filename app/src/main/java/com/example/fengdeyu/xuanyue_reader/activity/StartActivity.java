@@ -28,7 +28,7 @@ public class StartActivity extends Activity {
     };
 
     public void toLogin(){
-        Intent intent = new Intent(StartActivity.this, LoginActivity.class);
+        Intent intent = new Intent(StartActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

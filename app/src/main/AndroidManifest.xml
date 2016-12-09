@@ -22,7 +22,9 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SearchResultActivity" />
-        <activity android:name=".activity.BookIntroActivity"></activity>
+        <activity android:name=".activity.BookIntroActivity" />
+        <activity android:name=".activity.ReadActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"></activity>
     </application>
 
 </manifest>

@@ -29,7 +29,6 @@ public class SearchResultActivity extends AppCompatActivity {
 //    private ImageView iv_back;
     private ImageView iv_search;
 
-
     private RecyclerView bookItemView;
     private List<BookItemBean> mList=new ArrayList<>();
 
@@ -56,28 +55,12 @@ public class SearchResultActivity extends AppCompatActivity {
         bookItemView.setLayoutManager(new LinearLayoutManager(bookItemView.getContext()));
         bookItemView.setAdapter(bookItemAdapter);
 
-        bookItemView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        bookItemAdapter.setOnItemClickListener(new BookItemAdapter.onItemClickListener() {
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return true;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-                if(e.getAction()==MotionEvent.ACTION_UP) {
-                    startActivity(new Intent(SearchResultActivity.this, BookIntroActivity.class));
-                }
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
+            public void onItemClick(View view, int position) {
+                startActivity(new Intent(SearchResultActivity.this, BookIntroActivity.class));
             }
         });
-
-
 
 
 
@@ -98,28 +81,33 @@ public class SearchResultActivity extends AppCompatActivity {
 
     }
 
+
     public void loadList(){//加载书架数据
         BookItemBean bookItemBean1=new BookItemBean();
+        bookItemBean1.bookIconUrl=R.mipmap.book_icon2;
         bookItemBean1.bookTitle="仙逆";
         bookItemBean1.bookAuthor="作者:耳根";
-        bookItemBean1.bookcontent="第二百一十四章 陈绍轩";
+        bookItemBean1.bookcontent="第2088章 蓦然回首（结局）";
 
         mList.add(bookItemBean1);
 
         BookItemBean bookItemBean2=new BookItemBean();
+        bookItemBean2.bookIconUrl=R.mipmap.book_icon;
         bookItemBean2.bookTitle="太浩";
         bookItemBean2.bookAuthor="作者:无极书虫";
-        bookItemBean2.bookcontent="第二百一十五章 我是你爸爸啊";
+        bookItemBean2.bookcontent="同人:没有梦蝶的世界";
 
         mList.add(bookItemBean2);
 
         BookItemBean bookItemBean3=new BookItemBean();
-        bookItemBean3.bookTitle="岁月是朵双生花";
+        bookItemBean3.bookIconUrl=R.mipmap.book_icon1;
+        bookItemBean3.bookTitle="岁月是朵两生花";
         bookItemBean3.bookAuthor="作者:唐七公子";
-        bookItemBean3.bookcontent="第二百一十五章 我是你爸爸啊";
+        bookItemBean3.bookcontent="第二十六章 两生花";
 
         mList.add(bookItemBean3);
     }
+
 
     private void search(String keywords){
         //Intent intent=new Intent(SearchResultActivity.this,SearchResultActivity.class);

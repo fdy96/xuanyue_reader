@@ -28,6 +28,14 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
         this.mList = mList;
     }
 
+    public interface onItemClickListener{
+        void onItemClick(View view,int position);
+    }
+    private onItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(onItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener=mOnItemClickListener;
+    }
+
 
     @Override
     public BookcaseAdapter.bookcaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,11 +44,20 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
     }
 
     @Override
-    public void onBindViewHolder(BookcaseAdapter.bookcaseViewHolder holder, int position) {
-        holder.book_icon.setImageResource(R.mipmap.ic_launcher);
+    public void onBindViewHolder(final BookcaseAdapter.bookcaseViewHolder holder, final int position) {
+        holder.book_icon.setImageResource(mList.get(position).bookIconUrl);
         holder.book_title.setText(mList.get(position).bookTitle);
         holder.book_author.setText(mList.get(position).bookAuthor);
         holder.book_content.setText(mList.get(position).bookcontent);
+
+        if(mOnItemClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+                }
+            });
+        }
 
     }
 

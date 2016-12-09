@@ -33,6 +33,16 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.bookIt
         this.mList = mList;
     }
 
+    public interface onItemClickListener{
+        void onItemClick(View view,int position);
+    }
+    private onItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(onItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener=mOnItemClickListener;
+    }
+
+
+
     @Override
     public bookItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.list_book_item,parent,false);
@@ -41,12 +51,23 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.bookIt
     }
 
     @Override
-    public void onBindViewHolder(BookItemAdapter.bookItemViewHolder holder, int position) {
+    public void onBindViewHolder(final BookItemAdapter.bookItemViewHolder holder, final int position) {
 
-        holder.book_icon.setImageResource(R.mipmap.ic_launcher);
+        holder.book_icon.setImageResource(mList.get(position).bookIconUrl);
         holder.book_title.setText(mList.get(position).bookTitle);
         holder.book_author.setText(mList.get(position).bookAuthor);
         holder.book_content.setText(mList.get(position).bookcontent);
+
+        if(mOnItemClickListener!=null) {
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+
+                }
+            });
+        }
 
 
     }

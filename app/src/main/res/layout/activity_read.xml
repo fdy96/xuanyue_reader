@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_read"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/theme_leather_bg"
+    tools:context="com.example.fengdeyu.xuanyue_reader.activity.ReadActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_book_read_top"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#191919"
+        android:orientation="horizontal"
+        android:visibility="gone"
+
+        >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ab_back"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5" />
+
+
+
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="朗读"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="换源"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="简介"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="32dp"
+        android:text="
+        青春是一种谎言，一种罪恶，讴歌青春的人总是在欺骗自己周围的人。\n
+        积极地肯定自己身处的环境中的一切。他们只是扯上青春这两个字，不管是多么普通的解释或是社会常识都能够曲解，对他们而言、谎言、秘密、罪行、甚至是失败，只不过是青春的调味料而已。\n
+        假如说失败是青春的象征，交不到朋友的人不就身处青春之中吗？但是，他们是不会承认这一点的吧，一切只不过是他们对自己有利的说辞而已。\n
+        结论就是，享受青春的蠢蛋家伙们...去死吧"
+        android:textSize="20sp"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_book_read_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="#191919"
+        android:orientation="horizontal"
+        android:visibility="gone"
+
+
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:drawableTop="@mipmap/ic_menu_mode_night_manual"
+            android:text="夜间"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:drawableTop="@mipmap/ic_menu_settings_normal"
+            android:text="设置"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:drawableTop="@mipmap/ic_reader_ab_download"
+            android:text="缓存"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:drawableTop="@mipmap/ic_menu_bookmark"
+            android:text="书签"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:drawableTop="@mipmap/ic_menu_toc_normal"
+            android:text="目录"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
