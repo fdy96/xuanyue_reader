@@ -29,9 +29,12 @@
             android:name=".activity.ReadActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity android:name=".other.ConnectTestActivity" />
-        <activity android:name=".activity.ChapterContentActivity"
-            android:theme="@style/DialogTheme"
-            />
+        <activity
+            android:name=".activity.ChapterContentActivity"
+            android:theme="@style/DialogTheme" />
+        <activity android:name=".activity.GuideViewActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
+            ></activity>
     </application>
 
 </manifest>
