@@ -28,7 +28,10 @@
         <activity
             android:name=".activity.ReadActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".other.ConnectTestActivity"></activity>
+        <activity android:name=".other.ConnectTestActivity" />
+        <activity android:name=".activity.ChapterContentActivity"
+            android:theme="@style/DialogTheme"
+            />
     </application>
 
 </manifest>
