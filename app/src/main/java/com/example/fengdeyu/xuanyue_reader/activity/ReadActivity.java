@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 
@@ -27,6 +28,7 @@ public class ReadActivity extends AppCompatActivity {
 
     private LinearLayout ll_book_read_top;
     private LinearLayout ll_book_read_bottom;
+
 
 
     @Override
@@ -48,6 +50,7 @@ public class ReadActivity extends AppCompatActivity {
 
         ll_book_read_top= (LinearLayout) findViewById(R.id.ll_book_read_top);
         ll_book_read_bottom= (LinearLayout) findViewById(R.id.ll_book_read_bottom);
+
 
 
     }
@@ -74,37 +77,51 @@ public class ReadActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    private void toggleReadBar() {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+
+//显示状态栏
+
+//    private void toggleReadBar() {
+//        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+//        if(ll_book_read_top.getVisibility()==View.GONE){
+//            attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//            getWindow().setAttributes(attrs);
+//            handler1.sendEmptyMessageDelayed(0,200);
+//
+//
+//        }else {
+//
+//            ll_book_read_top.setVisibility(View.GONE);
+//            ll_book_read_bottom.setVisibility(View.GONE);
+//            handler2.sendMessage(new Message());
+//        }
+//
+//    }
+//    private Handler handler1 = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            ll_book_read_top.setVisibility(View.VISIBLE);
+//            ll_book_read_bottom.setVisibility(View.VISIBLE);
+//            super.handleMessage(msg);
+//        }
+//    };
+//    private Handler handler2 = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            WindowManager.LayoutParams attrs = getWindow().getAttributes();
+//            attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//            getWindow().setAttributes(attrs);
+//            super.handleMessage(msg);
+//        }
+//    };
+//
+// 不显示
+    private void toggleReadBar(){
         if(ll_book_read_top.getVisibility()==View.GONE){
-            attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-            getWindow().setAttributes(attrs);
-            handler1.sendEmptyMessageDelayed(0,200);
-
-
-        }else {
-
-            ll_book_read_top.setVisibility(View.GONE);
-            ll_book_read_bottom.setVisibility(View.GONE);
-            handler2.sendMessage(new Message());
-        }
-
-    }
-    private Handler handler1 = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
             ll_book_read_top.setVisibility(View.VISIBLE);
             ll_book_read_bottom.setVisibility(View.VISIBLE);
-            super.handleMessage(msg);
+        }else {
+            ll_book_read_top.setVisibility(View.GONE);
+            ll_book_read_bottom.setVisibility(View.GONE);
         }
-    };
-    private Handler handler2 = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            WindowManager.LayoutParams attrs = getWindow().getAttributes();
-            attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-            getWindow().setAttributes(attrs);
-            super.handleMessage(msg);
-        }
-    };
+    }
 }

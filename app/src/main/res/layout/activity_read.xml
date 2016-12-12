@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_read"
     android:layout_width="match_parent"
@@ -62,18 +63,26 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="32dp"
-        android:text="
-        青春是一种谎言，一种罪恶，讴歌青春的人总是在欺骗自己周围的人。\n
-        积极地肯定自己身处的环境中的一切。他们只是扯上青春这两个字，不管是多么普通的解释或是社会常识都能够曲解，对他们而言、谎言、秘密、罪行、甚至是失败，只不过是青春的调味料而已。\n
-        假如说失败是青春的象征，交不到朋友的人不就身处青春之中吗？但是，他们是不会承认这一点的吧，一切只不过是他们对自己有利的说辞而已。\n
-        结论就是，享受青春的蠢蛋家伙们...去死吧"
-        android:textSize="20sp"
 
-        />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:padding="32dp"
+                android:text="青春是一种谎言，一种罪恶，讴歌青春的人总是在欺骗自己周围的人。\n积极地肯定自己身处的环境中的一切。他们只是扯上青春这两个字，不管是多么普通的解释或是社会常识都能够曲解，对他们而言、谎言、秘密、罪行、甚至是失败，只不过是青春的调味料而已。\n
+            假如说失败是青春的象征，交不到朋友的人不就身处青春之中吗？但是，他们是不会承认这一点的吧，一切只不过是他们对自己有利的说辞而已。\n结论就是，享受青春的蠢蛋家伙们...去死吧
+            青春是一种谎言，一种罪恶，讴歌青春的人总是在欺骗自己周围的人。\n积极地肯定自己身处的环境中的一切。他们只是扯上青春这两个字，不管是多么普通的解释或是社会常识都能够曲解，对他们而言、谎言、秘密、罪行、甚至是失败，只不过是青春的调味料而已。\n
+            假如说失败是青春的象征，交不到朋友的人不就身处青春之中吗？但是，他们是不会承认这一点的吧，一切只不过是他们对自己有利的说辞而已。\n结论就是，享受青春的蠢蛋家伙们...去死吧
+            青春是一种谎言，一种罪恶，讴歌青春的人总是在欺骗自己周围的人。\n积极地肯定自己身处的环境中的一切。他们只是扯上青春这两个字，不管是多么普通的解释或是社会常识都能够曲解，对他们而言、谎言、秘密、罪行、甚至是失败，只不过是青春的调味料而已。\n
+            假如说失败是青春的象征，交不到朋友的人不就身处青春之中吗？但是，他们是不会承认这一点的吧，一切只不过是他们对自己有利的说辞而已。\n结论就是，享受青春的蠢蛋家伙们...去死吧"
+                android:textSize="20sp"
+                />
+
+
+
+
+
 
     <LinearLayout
         android:id="@+id/ll_book_read_bottom"

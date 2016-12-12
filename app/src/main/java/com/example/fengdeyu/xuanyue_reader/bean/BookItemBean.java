@@ -8,10 +8,12 @@ import android.os.Parcelable;
  */
 
 public class BookItemBean{
-    public int bookIconUrl;
+    public String bookIconUrl;
     public String bookTitle;
     public String bookAuthor;
-    public String bookcontent;
+    public String bookContent;
+    public String bookHref;
+    public String bookIntro;
 
 
 }

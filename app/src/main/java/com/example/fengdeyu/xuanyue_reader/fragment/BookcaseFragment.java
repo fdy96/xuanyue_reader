@@ -62,26 +62,23 @@ public class BookcaseFragment extends Fragment {
 
     public void loadList(){//加载书架数据
         BookItemBean bookItemBean1=new BookItemBean();
-        bookItemBean1.bookIconUrl=R.mipmap.book_icon2;
         bookItemBean1.bookTitle="仙逆";
         bookItemBean1.bookAuthor="作者:耳根";
-        bookItemBean1.bookcontent="第2088章 蓦然回首（结局）";
+        bookItemBean1.bookContent="第2088章 蓦然回首（结局）";
 
         mList.add(bookItemBean1);
 
         BookItemBean bookItemBean2=new BookItemBean();
-        bookItemBean2.bookIconUrl=R.mipmap.book_icon;
         bookItemBean2.bookTitle="太浩";
         bookItemBean2.bookAuthor="作者:无极书虫";
-        bookItemBean2.bookcontent="同人:没有梦蝶的世界";
+        bookItemBean2.bookContent="同人:没有梦蝶的世界";
 
         mList.add(bookItemBean2);
 
         BookItemBean bookItemBean3=new BookItemBean();
-        bookItemBean3.bookIconUrl=R.mipmap.book_icon1;
         bookItemBean3.bookTitle="岁月是朵两生花";
         bookItemBean3.bookAuthor="作者:唐七公子";
-        bookItemBean3.bookcontent="第二十六章 两生花";
+        bookItemBean3.bookContent="第二十六章 两生花";
 
         mList.add(bookItemBean3);
     }

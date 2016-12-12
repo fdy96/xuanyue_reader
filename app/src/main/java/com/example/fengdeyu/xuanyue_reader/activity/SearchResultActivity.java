@@ -2,6 +2,9 @@ package com.example.fengdeyu.xuanyue_reader.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,100 +21,212 @@ import android.widget.Toast;
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.adapter.BookItemAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.sqlite.RecordSQLiteOpenHelper;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
 
+    private String urlAddress="http://zhannei.baidu.com/cse/search?s=17233375349940438896&entry=1&q=";
     private EditText et_search;
-//
-//    private ImageView iv_back;
-    private ImageView iv_search;
 
     private RecyclerView bookItemView;
-    private List<BookItemBean> mList=new ArrayList<>();
+
+    List<String> bookIntro=new ArrayList<>();
+
+    private ImageView iv_search;
+    private ImageView iv_back;
+
+    private RecordSQLiteOpenHelper helper = new RecordSQLiteOpenHelper(this);;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-//
-//        iv_back= (ImageView) findViewById(R.id.iv_back);
-        iv_search= (ImageView) findViewById(R.id.iv_search);
-
-
         et_search= (EditText) findViewById(R.id.et_search);
         et_search.setText(getIntent().getStringExtra("keywords"));
 
 
+
+        String URL=urlAddress+cnToUnicode(et_search.getText().toString());
+
+
         bookItemView= (RecyclerView) findViewById(R.id.bookitem_recycler_view);
-        loadList();
-
-        BookItemAdapter bookItemAdapter=new BookItemAdapter(SearchResultActivity.this,mList);
+        new ConnectAsyncTask().execute(URL);
 
 
-        bookItemView.setLayoutManager(new LinearLayoutManager(bookItemView.getContext()));
-        bookItemView.setAdapter(bookItemAdapter);
+        iv_search= (ImageView) findViewById(R.id.iv_search);
+        iv_back= (ImageView) findViewById(R.id.iv_back);
 
-        bookItemAdapter.setOnItemClickListener(new BookItemAdapter.onItemClickListener() {
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(SearchResultActivity.this, BookIntroActivity.class));
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        iv_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String URL=urlAddress+cnToUnicode(et_search.getText().toString());
+                if(!hasData(et_search.getText().toString())) {
+                    insertData(et_search.getText().toString());
+                }
+                bookIntro.clear();
+                new ConnectAsyncTask().execute(URL);
             }
         });
 
 
-
-//        iv_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
-//
-//
-//        iv_search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //search(et_search.getText().toString());
-//            }
-//        });
-
     }
 
 
-    public void loadList(){//加载书架数据
-        BookItemBean bookItemBean1=new BookItemBean();
-        bookItemBean1.bookIconUrl=R.mipmap.book_icon2;
-        bookItemBean1.bookTitle="仙逆";
-        bookItemBean1.bookAuthor="作者:耳根";
-        bookItemBean1.bookcontent="第2088章 蓦然回首（结局）";
+    class ConnectAsyncTask extends AsyncTask<String,Void,List<BookItemBean>> {
 
-        mList.add(bookItemBean1);
 
-        BookItemBean bookItemBean2=new BookItemBean();
-        bookItemBean2.bookIconUrl=R.mipmap.book_icon;
-        bookItemBean2.bookTitle="太浩";
-        bookItemBean2.bookAuthor="作者:无极书虫";
-        bookItemBean2.bookcontent="同人:没有梦蝶的世界";
+        @Override
+        protected List<BookItemBean> doInBackground(String... params) {
+            List<BookItemBean> mList=new ArrayList<>();
 
-        mList.add(bookItemBean2);
 
-        BookItemBean bookItemBean3=new BookItemBean();
-        bookItemBean3.bookIconUrl=R.mipmap.book_icon1;
-        bookItemBean3.bookTitle="岁月是朵两生花";
-        bookItemBean3.bookAuthor="作者:唐七公子";
-        bookItemBean3.bookcontent="第二十六章 两生花";
 
-        mList.add(bookItemBean3);
+
+            try {
+
+                Document doc= Jsoup.connect(params[0]).get();
+
+                Elements intros=doc.select(".result-game-item-desc");
+                for(Element intro:intros){
+                    String s1=intro.text();
+                    bookIntro.add(s1);
+                }
+
+
+
+                Elements links=doc.select(".result-item");
+
+                for (Element link:links){
+                    BookItemBean bookItemBean=new BookItemBean();
+
+                    Elements hrefs=link.select("div[onclick]");
+                    for(Element href:hrefs){
+                        String s1=href.attr("onclick");
+                        String s2=s1.substring(s1.indexOf("'")+1,s1.lastIndexOf("'"));
+
+
+                        bookItemBean.bookHref=s2;//获取小说章节目录链接
+                    }
+
+                    Elements srcs=link.select("img[src]");
+                    for(Element src:srcs){
+                        String s1=src.attr("src");
+                        bookItemBean.bookIconUrl=s1;//获取小说图片链接
+                    }
+
+                    Elements titles=link.select(".result-item-title.result-game-item-title");
+                    for(Element title:titles){
+                        String s1=title.text();
+                        bookItemBean.bookTitle=s1;//获取小说名称
+                    }
+
+                    Elements authors=link.select(".result-game-item-info-tag");
+                    String s=authors.first().text().trim();
+                    bookItemBean.bookAuthor=s;//获取小说作者
+
+
+
+                    Elements contents=link.select(".result-game-item-uspan");
+
+                    for(Element content:contents){
+                        String s1=content.text();
+                        bookItemBean.bookContent="最新章节:"+s1;//获取小说最新章节
+                    }
+
+
+
+
+                    mList.add(bookItemBean);
+
+
+
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return mList;
+        }
+
+        @Override
+        protected void onPostExecute(final List<BookItemBean> mList) {
+            super.onPostExecute(mList);
+
+            BookItemAdapter bookItemAdapter=new BookItemAdapter(SearchResultActivity.this,mList);
+
+
+            bookItemView.setLayoutManager(new LinearLayoutManager(bookItemView.getContext()));
+            bookItemView.setAdapter(bookItemAdapter);
+
+            bookItemAdapter.setOnItemClickListener(new BookItemAdapter.onItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent =new Intent();
+                    intent.setClass(SearchResultActivity.this, BookIntroActivity.class);
+                    intent.putExtra("bookTitle",mList.get(position).bookTitle);
+                    intent.putExtra("bookAuthor",mList.get(position).bookAuthor);
+                    intent.putExtra("bookContent",mList.get(position).bookContent);
+                    intent.putExtra("bookIconUrl",mList.get(position).bookIconUrl);
+                    intent.putExtra("bookIntro",bookIntro.get(position));
+
+                    startActivity(intent);
+                }
+            });
+
+        }
+    }
+
+    public String cnToUnicode(String str){
+        String result="";
+        for (int i = 0; i < str.length(); i++){
+            int chr1 = (char) str.charAt(i);
+            if(chr1>=19968&&chr1<=171941){//汉字范围 \u4e00-\u9fa5 (中文)
+                result+="\\u" + Integer.toHexString(chr1);
+            }else{
+                result+=str.charAt(i);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 插入数据
+     */
+    private void insertData(String tempName) {
+        db = helper.getWritableDatabase();
+        db.execSQL("insert into records(name) values('" + tempName + "')");
+        db.close();
+    }
+    /**
+     * 检查数据库中是否已经有该条记录
+     */
+    private boolean hasData(String tempName) {
+        Cursor cursor = helper.getReadableDatabase().rawQuery(
+                "select id as _id,name from records where name =?", new String[]{tempName});
+        //判断是否有下一个
+        return cursor.moveToNext();
     }
 
 
-    private void search(String keywords){
-        //Intent intent=new Intent(SearchResultActivity.this,SearchResultActivity.class);
-        //intent.putExtra("keywords",keywords);
-        //startActivity(intent);
-    }
+
 }

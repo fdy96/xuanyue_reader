@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.fengdeyu.xuanyue_reader.R;
+import com.example.fengdeyu.xuanyue_reader.other.ConnectTestActivity;
 
 public class StartActivity extends Activity {
 

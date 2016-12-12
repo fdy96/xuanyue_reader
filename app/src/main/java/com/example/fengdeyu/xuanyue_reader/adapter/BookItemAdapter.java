@@ -16,6 +16,7 @@ import com.example.fengdeyu.xuanyue_reader.activity.BookIntroActivity;
 import com.example.fengdeyu.xuanyue_reader.activity.SearchActivity;
 import com.example.fengdeyu.xuanyue_reader.activity.StartActivity;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.other.ImageLoader;
 
 import java.util.List;
 
@@ -53,10 +54,13 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.bookIt
     @Override
     public void onBindViewHolder(final BookItemAdapter.bookItemViewHolder holder, final int position) {
 
-        holder.book_icon.setImageResource(mList.get(position).bookIconUrl);
+        holder.book_icon.setImageResource(R.mipmap.book_icon);
+        new ImageLoader().showImageByThread(holder.book_icon,mList.get(position).bookIconUrl);
+
+
         holder.book_title.setText(mList.get(position).bookTitle);
         holder.book_author.setText(mList.get(position).bookAuthor);
-        holder.book_content.setText(mList.get(position).bookcontent);
+        holder.book_content.setText(mList.get(position).bookContent);
 
         if(mOnItemClickListener!=null) {
 

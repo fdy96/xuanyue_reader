@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fengdeyu.xuanyue_reader">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,8 +25,10 @@
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.SearchResultActivity" />
         <activity android:name=".activity.BookIntroActivity" />
-        <activity android:name=".activity.ReadActivity"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen"></activity>
+        <activity
+            android:name=".activity.ReadActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+        <activity android:name=".other.ConnectTestActivity"></activity>
     </application>
 
 </manifest>

@@ -15,9 +15,10 @@
         >
         <ImageView
             android:id="@+id/iv_book_icon"
-            android:layout_width="50dp"
+            android:layout_width="45dp"
             android:layout_height="60dp"
-            android:background="@mipmap/ic_launcher"
+            android:background="@mipmap/book_icon"
+            android:scaleType="fitXY"
             />
 
         <LinearLayout
