@@ -24,7 +24,6 @@ import java.net.URL;
 public class ImageLoader {
 
     private ImageView mImageView;
-    private String mUrl;
 
     private Handler handler=new Handler(){
         @Override

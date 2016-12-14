@@ -1,5 +1,8 @@
 package com.example.fengdeyu.xuanyue_reader.other;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.example.fengdeyu.xuanyue_reader.bean.ChapterContentBean;
 
 import org.jsoup.Jsoup;
@@ -17,6 +20,8 @@ import java.util.List;
 
 public class GetChapterContent {
     public List<ChapterContentBean> mList=new ArrayList<>();
+    public int currentChapter=0;
+    public String bookTitle;
 
     private static GetChapterContent getChapterContent=null;
 
@@ -30,15 +35,19 @@ public class GetChapterContent {
 
     public void loadChapterContent(String URL){
         //TODO:从网络上获取章节列表
-        URL="http://www.23us.so/files/article/html/10/10674/index.html";
 
         try {
             Document doc= Jsoup.connect(URL).get();
             Elements links=doc.select("td.L");
             for(Element link:links){
                 ChapterContentBean chapterContentBean=new ChapterContentBean();
-                chapterContentBean.chapter_name=link.text();
-                chapterContentBean.chapter_url=link.attr("href");
+
+                Elements hrefs=link.select("a[href]");
+                for(Element href:hrefs){
+                    chapterContentBean.chapter_url="http://www.23us.so"+href.attr("href");
+                    chapterContentBean.chapter_name=link.text();
+                }
+
                 mList.add(chapterContentBean);
             }
         } catch (IOException e) {
@@ -46,6 +55,11 @@ public class GetChapterContent {
         }
 
 
+    }
+
+    public void clear(){
+        mList.clear();
+        currentChapter=0;
     }
 
 }

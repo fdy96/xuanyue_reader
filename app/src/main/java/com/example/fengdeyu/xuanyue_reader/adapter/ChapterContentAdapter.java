@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.bean.ChapterContentBean;
+import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 
 import java.util.List;
 
@@ -22,13 +23,11 @@ public class ChapterContentAdapter extends RecyclerView.Adapter<ChapterContentAd
 
     private Context mContext;
     private List<ChapterContentBean> mList;
-    private int currentChapter;
 
-    public ChapterContentAdapter(Context mContext, List<ChapterContentBean> mList, int currentChapter) {
+    public ChapterContentAdapter(Context mContext, List<ChapterContentBean> mList) {
         this.mContext = mContext;
         this.mList = mList;
 
-        this.currentChapter = currentChapter;
     }
 
     public interface onItemClickListener{
@@ -49,7 +48,10 @@ public class ChapterContentAdapter extends RecyclerView.Adapter<ChapterContentAd
     @Override
     public void onBindViewHolder(final chapterContentViewHolder holder, final int position) {
         holder.tv_chapter_name.setText(mList.get(position).chapter_name);
-        if(position==currentChapter){
+        holder.ic_chapter_content.setImageResource(R.mipmap.ic_chapter_content_normal);
+
+
+        if(position== GetChapterContent.getInstance().currentChapter){
             holder.ic_chapter_content.setImageResource(R.mipmap.ic_chapter_content_activated);
         }
 

@@ -115,6 +115,7 @@
             android:layout_marginBottom="24dp">
 
             <Button
+                android:id="@+id/btn_add_book"
                 android:background="#8b0000"
                 android:layout_width="140dp"
                 android:layout_height="45dp"
@@ -124,7 +125,6 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
                 android:layout_weight="2"
 
                 />

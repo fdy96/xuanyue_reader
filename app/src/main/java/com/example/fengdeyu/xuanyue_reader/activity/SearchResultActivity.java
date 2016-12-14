@@ -188,6 +188,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     intent.putExtra("bookContent",mList.get(position).bookContent);
                     intent.putExtra("bookIconUrl",mList.get(position).bookIconUrl);
                     intent.putExtra("bookIntro",bookIntro.get(position));
+                    intent.putExtra("bookHref",mList.get(position).bookHref);
 
                     startActivity(intent);
                 }

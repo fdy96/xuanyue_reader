@@ -1,6 +1,7 @@
 package com.example.fengdeyu.xuanyue_reader.fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
+import com.example.fengdeyu.xuanyue_reader.activity.BookIntroActivity;
 import com.example.fengdeyu.xuanyue_reader.activity.ReadActivity;
 import com.example.fengdeyu.xuanyue_reader.adapter.BookcaseAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
+import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,8 @@ import java.util.List;
 
 public class BookcaseFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private List<BookItemBean> mList=new ArrayList<>();
+    BookcaseAdapter bookcaseAdapter;
+    private int clickPos;
 
 
 
@@ -40,47 +45,48 @@ public class BookcaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        Bundle bundle=getArguments();
 
-        loadList();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
-        BookcaseAdapter bookcaseAdapter=new BookcaseAdapter(getActivity(),mList);
+        bookcaseAdapter=new BookcaseAdapter(getActivity(), GetBookCase.getInstance().mList);
+
 
         mRecyclerView.setAdapter(bookcaseAdapter);
 
         bookcaseAdapter.setOnItemClickListener(new BookcaseAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(),mList.get(position).bookTitle.toString(),Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), ReadActivity.class));
+                clickPos=position;
+                new loadChapterContentAsyncTask().execute(GetBookCase.getInstance().mList.get(position).bookHref);
             }
         });
 
     }
 
-    public void loadList(){//加载书架数据
-        BookItemBean bookItemBean1=new BookItemBean();
-        bookItemBean1.bookTitle="仙逆";
-        bookItemBean1.bookAuthor="作者:耳根";
-        bookItemBean1.bookContent="第2088章 蓦然回首（结局）";
-
-        mList.add(bookItemBean1);
-
-        BookItemBean bookItemBean2=new BookItemBean();
-        bookItemBean2.bookTitle="太浩";
-        bookItemBean2.bookAuthor="作者:无极书虫";
-        bookItemBean2.bookContent="同人:没有梦蝶的世界";
-
-        mList.add(bookItemBean2);
-
-        BookItemBean bookItemBean3=new BookItemBean();
-        bookItemBean3.bookTitle="岁月是朵两生花";
-        bookItemBean3.bookAuthor="作者:唐七公子";
-        bookItemBean3.bookContent="第二十六章 两生花";
-
-        mList.add(bookItemBean3);
+    @Override
+    public void onResume() {
+        super.onResume();
+        bookcaseAdapter.notifyDataSetChanged();
     }
 
+    public class loadChapterContentAsyncTask extends AsyncTask<String,Void,Void> {
+
+        @Override
+        protected Void doInBackground(String... params) {
+            GetChapterContent.getInstance().loadChapterContent(params[0]);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            GetChapterContent.getInstance().currentChapter=GetBookCase.getInstance().mList.get(clickPos).currentChapter;
+            GetChapterContent.getInstance().bookTitle=GetBookCase.getInstance().mList.get(clickPos).bookTitle;
+            startActivity(new Intent(getActivity(), ReadActivity.class).putExtra("bookId",clickPos).putExtra("intoWay","bookCase"));
+
+        }
+    }
 }

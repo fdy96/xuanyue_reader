@@ -13,6 +13,7 @@ public class BookItemBean{
     public String bookAuthor;
     public String bookContent;
     public String bookHref;
+    public int currentChapter=0;
     public String bookIntro;
 
 

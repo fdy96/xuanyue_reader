@@ -13,6 +13,19 @@
         android:scaleType="fitXY"
 
         />
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@mipmap/ic_dot_default"
+        android:text="跳过"
+        android:gravity="center"
+
+        />
+
 
 
 </RelativeLayout>

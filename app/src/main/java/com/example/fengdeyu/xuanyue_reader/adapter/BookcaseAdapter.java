@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.other.ImageLoader;
 
 import java.util.List;
 
@@ -46,6 +47,8 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
     @Override
     public void onBindViewHolder(final BookcaseAdapter.bookcaseViewHolder holder, final int position) {
         holder.book_icon.setImageResource(R.mipmap.book_icon);
+        new ImageLoader().showImageByThread(holder.book_icon,mList.get(position).bookIconUrl);
+
         holder.book_title.setText(mList.get(position).bookTitle);
         holder.book_author.setText(mList.get(position).bookAuthor);
         holder.book_content.setText(mList.get(position).bookContent);

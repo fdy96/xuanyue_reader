@@ -6,9 +6,10 @@
     android:background="@drawable/dialog_theme"
     android:orientation="vertical">
     <TextView
+        android:id="@+id/tv_book_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="仙逆"
+        android:text=""
         android:textSize="18sp"
         android:gravity="center_horizontal"
         />
