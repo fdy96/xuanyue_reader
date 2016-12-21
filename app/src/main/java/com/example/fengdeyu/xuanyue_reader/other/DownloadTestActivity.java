@@ -33,6 +33,7 @@ public class DownloadTestActivity extends AppCompatActivity {
 
     public int num=0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

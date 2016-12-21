@@ -33,6 +33,9 @@
             android:name=".activity.ChapterContentActivity"
             android:theme="@style/DialogTheme" />
         <activity
+            android:name=".activity.ChapterDownloadActivity"
+            android:theme="@style/DialogTheme" />
+        <activity
             android:name=".activity.GuideViewActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity android:name=".other.DownloadTestActivity"></activity>

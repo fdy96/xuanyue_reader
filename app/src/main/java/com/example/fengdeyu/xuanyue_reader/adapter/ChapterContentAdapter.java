@@ -1,6 +1,7 @@
 package com.example.fengdeyu.xuanyue_reader.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +50,11 @@ public class ChapterContentAdapter extends RecyclerView.Adapter<ChapterContentAd
     public void onBindViewHolder(final chapterContentViewHolder holder, final int position) {
         holder.tv_chapter_name.setText(mList.get(position).chapter_name);
         holder.ic_chapter_content.setImageResource(R.mipmap.ic_chapter_content_normal);
+
+
+        if(mList.get(position).isDownload){
+            holder.ic_chapter_content.setImageResource(R.mipmap.ic_chapter_content_download);
+        }
 
 
         if(position== GetChapterContent.getInstance().currentChapter){

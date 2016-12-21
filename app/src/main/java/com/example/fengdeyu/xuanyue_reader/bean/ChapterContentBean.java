@@ -17,4 +17,6 @@ public class ChapterContentBean {
     public String chapter_url;
 
 
+    public boolean isDownload=false;
+    public String chapter_local_url=null;
 }

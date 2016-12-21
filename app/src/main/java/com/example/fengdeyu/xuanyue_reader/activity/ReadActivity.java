@@ -32,9 +32,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static android.R.attr.cacheColorHint;
+import static android.R.attr.fingerprintAuthDrawable;
 import static android.R.attr.statusBarColor;
 
 public class ReadActivity extends AppCompatActivity {
@@ -49,6 +53,7 @@ public class ReadActivity extends AppCompatActivity {
     private TextView tv_contents;
 
     private TextView tv_chapter_content;
+    private TextView tv_chapter_download;
 
     private MyScrollView scrollView;
 
@@ -90,6 +95,13 @@ public class ReadActivity extends AppCompatActivity {
             }
         });
 
+        tv_chapter_download= (TextView) findViewById(R.id.tv_chapter_download);
+        tv_chapter_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ChapterDownloadActivity.class));
+            }
+        });
 
 
     }
@@ -99,8 +111,13 @@ public class ReadActivity extends AppCompatActivity {
         super.onResume();
         String url;
 
+
         if(getIntent().getStringExtra("intoWay").equals("bookCase")) {
-            url=GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+            if(GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).isDownload){
+                url=GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_local_url;
+            }else {
+                url=GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+            }
 
         }else{
             url=GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
@@ -163,10 +180,38 @@ public class ReadActivity extends AppCompatActivity {
         }
     }
 
+    private String read(String url) {
+        try {
+            FileInputStream inputStream=new FileInputStream(url);
+            byte[] bytes = new byte[1024];
+            ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+            while (inputStream.read(bytes) != -1) {
+                arrayOutputStream.write(bytes, 0, bytes.length);
+            }
+            inputStream.close();
+            arrayOutputStream.close();
+            String contents = new String(arrayOutputStream.toByteArray());
+
+            return contents;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
     public class loadContentsAsyncTask extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... params) {
+            if(getIntent().getStringExtra("intoWay").equals("bookCase")&&
+                    GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).isDownload){
+                return read(params[0]);
+            }
+
             try {
                 Document doc= Jsoup.connect(params[0]).get();
                 String contents=doc.getElementById("contents").text();
@@ -181,17 +226,16 @@ public class ReadActivity extends AppCompatActivity {
         protected void onPostExecute(String contents) {
             super.onPostExecute(contents);
 
-            StringBuilder sb =new StringBuilder(contents);
-            int i=0;
+            if(contents!=null) {
+                StringBuilder sb = new StringBuilder(contents);
+                int i = 0;
+                while (sb.indexOf(" ", i + 3) != -1) {
+                    i = sb.indexOf(" ", i + 3);
+                    sb.insert(i, "\n");
+                }
 
-
-
-            while (sb.indexOf(" ",i+3)!=-1){
-                i=sb.indexOf(" ",i+3);
-                sb.insert(i,"\n");
+                tv_contents.setText(sb.toString());
             }
-
-            tv_contents.setText(sb);
 
         }
     }
