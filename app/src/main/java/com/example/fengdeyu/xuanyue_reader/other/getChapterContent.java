@@ -44,11 +44,15 @@ public class GetChapterContent {
 
                 Elements hrefs=link.select("a[href]");
                 for(Element href:hrefs){
-                    chapterContentBean.chapter_url="http://www.23us.so"+href.attr("href");
-                    chapterContentBean.chapter_name=link.text();
+
+                    if(!link.text().equals("")) {
+                        chapterContentBean.chapter_name = link.text();
+                        chapterContentBean.chapter_url="http://www.23us.so"+href.attr("href");
+                        mList.add(chapterContentBean);
+                    }
                 }
 
-                mList.add(chapterContentBean);
+
             }
         } catch (IOException e) {
             e.printStackTrace();

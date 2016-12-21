@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".other.DownloadTestActivity"
+    >
+
+    <Button
+        android:text="获取"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/get"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="下载"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/download"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="停止"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stop"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="查看"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/read"
+        android:layout_weight="1" />
+</LinearLayout>

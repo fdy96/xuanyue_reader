@@ -65,6 +65,7 @@
 
 
     <com.example.fengdeyu.xuanyue_reader.other.MyScrollView
+        android:id="@+id/my_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

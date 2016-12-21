@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.other.ConnectTestActivity;
+import com.example.fengdeyu.xuanyue_reader.other.DownloadTestActivity;
 
 public class StartActivity extends Activity {
     private TextView tv_start;

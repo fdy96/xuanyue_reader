@@ -30,7 +30,6 @@ import java.util.List;
 public class BookcaseFragment extends Fragment {
     private RecyclerView mRecyclerView;
     BookcaseAdapter bookcaseAdapter;
-    private int clickPos;
 
 
 
@@ -46,6 +45,7 @@ public class BookcaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        loadTestBook();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
@@ -57,36 +57,41 @@ public class BookcaseFragment extends Fragment {
         bookcaseAdapter.setOnItemClickListener(new BookcaseAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                clickPos=position;
-                new loadChapterContentAsyncTask().execute(GetBookCase.getInstance().mList.get(position).bookHref);
+
+                GetChapterContent.getInstance().currentChapter=GetBookCase.getInstance().mList.get(position).currentChapter;
+                GetChapterContent.getInstance().bookTitle=GetBookCase.getInstance().mList.get(position).bookTitle;
+                startActivity(new Intent(getActivity(), ReadActivity.class).putExtra("bookId",position).putExtra("intoWay","bookCase"));
             }
         });
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
         bookcaseAdapter.notifyDataSetChanged();
+
+
+
     }
 
-    public class loadChapterContentAsyncTask extends AsyncTask<String,Void,Void> {
+    private void loadTestBook(){
+        final BookItemBean bookItemBean=new BookItemBean();
+        bookItemBean.bookTitle="仙逆";
+        bookItemBean.bookAuthor="作者:  耳根";
+        bookItemBean.bookContent="最新章节:新书--我欲封天";
+        bookItemBean.bookHref="http://www.23us.so/files/article/html/10/10674/index.html";
+        bookItemBean.bookIconUrl="http://www.23us.so/files/article/image/10/10674/10674s.jpg";
+        if(!GetBookCase.getInstance().hasBook(bookItemBean)){
+            GetBookCase.getInstance().mList.add(bookItemBean);
 
-        @Override
-        protected Void doInBackground(String... params) {
-            GetChapterContent.getInstance().loadChapterContent(params[0]);
-
-            return null;
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    GetBookCase.getInstance().loadChapterContent(0,bookItemBean.bookHref);
+                }
+            }.start();
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            GetChapterContent.getInstance().currentChapter=GetBookCase.getInstance().mList.get(clickPos).currentChapter;
-            GetChapterContent.getInstance().bookTitle=GetBookCase.getInstance().mList.get(clickPos).bookTitle;
-            startActivity(new Intent(getActivity(), ReadActivity.class).putExtra("bookId",clickPos).putExtra("intoWay","bookCase"));
-
-        }
     }
 }

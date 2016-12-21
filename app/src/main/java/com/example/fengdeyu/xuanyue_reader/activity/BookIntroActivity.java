@@ -106,18 +106,33 @@ public class BookIntroActivity extends AppCompatActivity {
             btn_add_book.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BookItemBean bookItemBean=new BookItemBean();
+                    final BookItemBean bookItemBean=new BookItemBean();
                     bookItemBean.bookTitle=getIntent().getStringExtra("bookTitle");
                     bookItemBean.bookAuthor=getIntent().getStringExtra("bookAuthor");
                     bookItemBean.bookContent=getIntent().getStringExtra("bookContent");
                     bookItemBean.bookIconUrl=getIntent().getStringExtra("bookIconUrl");
                     bookItemBean.bookHref=getIntent().getStringExtra("bookHref");
+//                    for(int i=0;i<GetChapterContent.getInstance().mList.size();i++){
+//                        bookItemBean.mChapterList.add(GetChapterContent.getInstance().mList.get(i));
+//                    }
+
                     if(GetBookCase.getInstance().hasBook(bookItemBean)){
                         Toast.makeText(BookIntroActivity.this,"此书已在书架,请勿重复添加!",Toast.LENGTH_SHORT).show();
                     }else {
                         GetBookCase.getInstance().mList.add(bookItemBean);
+                        new Thread(){
+                            @Override
+                            public void run() {
+                                super.run();
+                                GetBookCase.getInstance().loadChapterContent(GetBookCase.getInstance().mList.size()-1,bookItemBean.bookHref);
+                            }
+                        }.start();
+
                         Toast.makeText(BookIntroActivity.this,"加入书架成功!",Toast.LENGTH_SHORT).show();
-                    }
+
+                        }
+
+
 
 
                 }

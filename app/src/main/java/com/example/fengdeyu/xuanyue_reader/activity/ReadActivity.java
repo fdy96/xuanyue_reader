@@ -21,10 +21,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
+import com.example.fengdeyu.xuanyue_reader.other.MyScrollView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,10 +34,13 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
+import static android.R.attr.cacheColorHint;
 import static android.R.attr.statusBarColor;
 
 public class ReadActivity extends AppCompatActivity {
     private ImageView iv_back;
+
+    int bookId;
 
 
     private LinearLayout ll_book_read_top;
@@ -45,12 +50,16 @@ public class ReadActivity extends AppCompatActivity {
 
     private TextView tv_chapter_content;
 
+    private MyScrollView scrollView;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
+
+        bookId = getIntent().getIntExtra("bookId", 0);
 
 
         iv_back= (ImageView) findViewById(R.id.iv_back);
@@ -60,6 +69,8 @@ public class ReadActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        scrollView= (MyScrollView) findViewById(R.id.my_scroll_view);
 
         tv_contents= (TextView) findViewById(R.id.tv_contents);
 
@@ -74,7 +85,7 @@ public class ReadActivity extends AppCompatActivity {
         tv_chapter_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),ChapterContentActivity.class);
+                Intent intent=new Intent(getApplicationContext(),ChapterContentActivity.class).putExtra("bookId",bookId).putExtra("intoWay",getIntent().getStringExtra("intoWay"));
                 startActivity(intent);
             }
         });
@@ -86,9 +97,18 @@ public class ReadActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        String url;
 
-        String url=GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+        if(getIntent().getStringExtra("intoWay").equals("bookCase")) {
+            url=GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+
+        }else{
+            url=GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+        }
         new loadContentsAsyncTask().execute(url);
+
+        scrollView.scrollTo(0,0);
+
 
     }
 
@@ -97,11 +117,13 @@ public class ReadActivity extends AppCompatActivity {
         super.onDestroy();
 
         if(getIntent().getStringExtra("intoWay").equals("bookCase")) {
-            int bookId = getIntent().getIntExtra("bookId", 0);
+
             GetBookCase.getInstance().mList.get(bookId).currentChapter = GetChapterContent.getInstance().currentChapter;
         }
         GetChapterContent.getInstance().clear();
     }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -113,12 +135,17 @@ public class ReadActivity extends AppCompatActivity {
         int touchEvent = event.getAction();
 
         switch (touchEvent){
+            case MotionEvent.ACTION_DOWN:
+                Toast.makeText(ReadActivity.this,"Down",Toast.LENGTH_SHORT).show();
+
             case MotionEvent.ACTION_UP:
                 if(x>display.getWidth()/4&&x<3*display.getWidth()/4&&y>display.getHeight()/4&&y<3*display.getHeight()/4){
                     toggleReadBar();
 
                 }
+
                 break;
+
 
         }
         return super.onTouchEvent(event);
@@ -154,7 +181,17 @@ public class ReadActivity extends AppCompatActivity {
         protected void onPostExecute(String contents) {
             super.onPostExecute(contents);
 
-            tv_contents.setText(contents);
+            StringBuilder sb =new StringBuilder(contents);
+            int i=0;
+
+
+
+            while (sb.indexOf(" ",i+3)!=-1){
+                i=sb.indexOf(" ",i+3);
+                sb.insert(i,"\n");
+            }
+
+            tv_contents.setText(sb);
 
         }
     }

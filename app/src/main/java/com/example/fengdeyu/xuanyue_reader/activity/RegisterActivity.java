@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btn_backLogin;
     private Button btn_register;
 
-    String urlAddress = "http://192.168.155.3:8080/LoginAndRegister/RegisterServlet";
+    String urlAddress = "http://10.128.186.232:8080/LoginAndRegister/RegisterServlet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

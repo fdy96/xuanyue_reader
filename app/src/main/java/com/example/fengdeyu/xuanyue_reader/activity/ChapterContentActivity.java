@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.adapter.ChapterContentAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.ChapterContentBean;
+import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 
 import java.util.ArrayList;
@@ -31,11 +32,21 @@ public class ChapterContentActivity extends Activity {
         setContentView(R.layout.activity_chapter_content);
 
 
+        ChapterContentAdapter adapter;
+
         chapter_content_recycler_view= (RecyclerView) findViewById(R.id.chapter_content_recycler_view);
         tv_book_title= (TextView) findViewById(R.id.tv_book_title);
-        tv_book_title.setText(GetChapterContent.getInstance().bookTitle);
+        if(getIntent().getStringExtra("intoWay").equals("bookCase")){
+            tv_book_title.setText(GetBookCase.getInstance().mList.get(getIntent().getIntExtra("bookId",0)).bookTitle);
+            adapter=new ChapterContentAdapter(ChapterContentActivity.this,
+                    GetBookCase.getInstance().mList.get(getIntent().getIntExtra("bookId",0)).mChapterList);
+        }else {
+            tv_book_title.setText(GetChapterContent.getInstance().bookTitle);
+            adapter=new ChapterContentAdapter(ChapterContentActivity.this,GetChapterContent.getInstance().mList);
 
-        ChapterContentAdapter adapter=new ChapterContentAdapter(ChapterContentActivity.this,GetChapterContent.getInstance().mList);
+        }
+
+
         chapter_content_recycler_view.setLayoutManager(new LinearLayoutManager(chapter_content_recycler_view.getContext()));
         chapter_content_recycler_view.setAdapter(adapter);
         chapter_content_recycler_view.scrollToPosition(GetChapterContent.getInstance().currentChapter);

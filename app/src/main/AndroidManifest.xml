@@ -32,9 +32,10 @@
         <activity
             android:name=".activity.ChapterContentActivity"
             android:theme="@style/DialogTheme" />
-        <activity android:name=".activity.GuideViewActivity"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen"
-            ></activity>
+        <activity
+            android:name=".activity.GuideViewActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+        <activity android:name=".other.DownloadTestActivity"></activity>
     </application>
 
 </manifest>

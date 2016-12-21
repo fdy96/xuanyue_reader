@@ -1,9 +1,17 @@
 package com.example.fengdeyu.xuanyue_reader.other;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.bean.ChapterContentBean;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +21,6 @@ import java.util.List;
 
 public class GetBookCase {
     public List<BookItemBean> mList=new ArrayList<>();
-    public int currentChapter=0;
 
     private static GetBookCase getBookCase=null;
 
@@ -43,6 +50,33 @@ public class GetBookCase {
             }
         }
         return false;
+    }
+
+    public void loadChapterContent(int pos, String URL) {
+        //TODO:从网络上获取章节列表
+
+        try {
+            Document doc = Jsoup.connect(URL).get();
+            Elements links = doc.select("td.L");
+            for (Element link : links) {
+                ChapterContentBean chapterContentBean = new ChapterContentBean();
+
+                Elements hrefs = link.select("a[href]");
+                for (Element href : hrefs) {
+
+                    if (!link.text().equals("")) {
+                        chapterContentBean.chapter_name = link.text();
+                        chapterContentBean.chapter_url = "http://www.23us.so" + href.attr("href");
+
+                        mList.get(pos).mChapterList.add(chapterContentBean);
+                    }
+                }
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
