@@ -99,7 +99,7 @@ public class ReadActivity extends AppCompatActivity {
         tv_chapter_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ChapterDownloadActivity.class));
+                startActivity(new Intent(getApplicationContext(),ChapterDownloadActivity.class).putExtra("bookId",bookId));
             }
         });
 
