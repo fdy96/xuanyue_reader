@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/ab_search_file"
         android:orderInCategory="100"
         android:title="扫描本地书籍"
         app:showAsAction="never"

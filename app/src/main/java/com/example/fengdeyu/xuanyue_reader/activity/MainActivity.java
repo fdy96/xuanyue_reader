@@ -19,9 +19,11 @@ import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.adapter.FragmentAdapter;
+import com.example.fengdeyu.xuanyue_reader.adapter.ScanBookAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
 import com.example.fengdeyu.xuanyue_reader.fragment.BookcaseFragment;
 import com.example.fengdeyu.xuanyue_reader.fragment.HomeFindFragment;
+import com.example.fengdeyu.xuanyue_reader.other.SearchFileTestActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        View drawView=navigationView.inflateHeaderView(R.layout.navigation_header);
-        tv_toLogin= (TextView) drawView.findViewById(R.id.tv_toLogin);
+        View headerDrawerView=navigationView.inflateHeaderView(R.layout.navigation_header);
+        tv_toLogin= (TextView) headerDrawerView.findViewById(R.id.tv_toLogin);
         tv_toLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.finish();
             }
         });
+
+
 
         initViewPager();
 
@@ -127,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.ab_search:
                 startActivity(new Intent(MainActivity.this,SearchActivity.class));
+            case R.id.ab_search_file:
+                startActivity(new Intent(MainActivity.this, ScanBookActivity.class));
 
         }
         return super.onOptionsItemSelected(item);

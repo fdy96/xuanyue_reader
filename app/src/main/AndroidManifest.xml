@@ -3,6 +3,8 @@
     package="com.example.fengdeyu.xuanyue_reader">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +40,10 @@
         <activity
             android:name=".activity.GuideViewActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".other.DownloadTestActivity"></activity>
+        <activity android:name=".other.DownloadTestActivity" />
+        <activity android:name=".other.SearchFileTestActivity" />
+        <activity android:name=".activity.ScanBookActivity" />
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
 
 </manifest>

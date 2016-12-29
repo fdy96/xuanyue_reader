@@ -41,7 +41,7 @@ public class DownloadServer {
             String s=GetBookCase.getInstance().mList.get(mBookId).mChapterList.get(j).chapter_url;
             String fileName=s.substring(s.lastIndexOf("/")+1,s.lastIndexOf("."));
 
-            File file=new File(getDirPath()+fileName+".txt");
+            File file=new File(getDirPath()+"/"+fileName+".txt");
             if(!file.exists()){
                 try {
                     file.createNewFile();
@@ -49,6 +49,8 @@ public class DownloadServer {
                     e.printStackTrace();
                 }
             }
+
+            Log.i("info",file.getPath());
 
 
             Document doc = null;
@@ -90,7 +92,7 @@ public class DownloadServer {
         String s1=GetBookCase.getInstance().mList.get(mBookId).bookHref;
         String s2=s1.substring(0,s1.lastIndexOf("/"));
         String s3=s2.substring(s2.lastIndexOf("/")+1);
-        String dirPath=mContext.getFilesDir()+s3;
+        String dirPath=mContext.getFilesDir()+"/"+s3;
         return dirPath;
     }
 

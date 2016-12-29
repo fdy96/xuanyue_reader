@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     private Button btn_sign;
 
-    String urlAddress = "http://10.128.186.232:8080/LoginAndRegister/LoginServlet";
+    String urlAddress = "http://10.128.228.39:8080/LoginAndRegister/LoginServlet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
