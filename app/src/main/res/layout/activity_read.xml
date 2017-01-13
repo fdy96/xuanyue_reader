@@ -8,6 +8,17 @@
     android:background="@mipmap/theme_leather_bg"
     tools:context="com.example.fengdeyu.xuanyue_reader.activity.ReadActivity">
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="分页"
+        android:id="@+id/paging"
+
+        />
+
+
     <LinearLayout
         android:id="@+id/ll_book_read_top"
         android:layout_width="match_parent"
@@ -74,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:padding="32dp"
+            android:padding="30dp"
             android:text=""
             android:textSize="20sp"
             />

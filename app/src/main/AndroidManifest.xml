@@ -43,7 +43,13 @@
         <activity android:name=".other.DownloadTestActivity" />
         <activity android:name=".other.SearchFileTestActivity" />
         <activity android:name=".activity.ScanBookActivity" />
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity
+            android:name=".other.TestPagingActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+        <activity android:name=".activity.ReadPageActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen"
+            ></activity>
     </application>
 
 </manifest>

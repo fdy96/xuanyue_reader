@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -27,6 +28,7 @@ import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 import com.example.fengdeyu.xuanyue_reader.other.MyScrollView;
+import com.example.fengdeyu.xuanyue_reader.other.TestPagingActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -58,11 +60,26 @@ public class ReadActivity extends AppCompatActivity {
     private MyScrollView scrollView;
 
 
+    private Button btn_paging;          ///////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
+
+
+        btn_paging= (Button)findViewById(R.id.paging);         //////
+
+        btn_paging.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReadActivity.this, ReadPageActivity.class).putExtra("contents",tv_contents.getText().toString()));
+
+            }
+        });
+
+
+
 
         bookId = getIntent().getIntExtra("bookId", 0);
 
@@ -227,14 +244,30 @@ public class ReadActivity extends AppCompatActivity {
             super.onPostExecute(contents);
 
             if(contents!=null) {
-                StringBuilder sb = new StringBuilder(contents);
+                 StringBuilder sb = new StringBuilder(contents);
                 int i = 0;
                 while (sb.indexOf(" ", i + 3) != -1) {
                     i = sb.indexOf(" ", i + 3);
                     sb.insert(i, "\n");
                 }
+//                int m=0;
+//                while (sb.indexOf("“",m+2)!=-1){
+//                    m=sb.indexOf("“",m+2);
+//                    Log.i("info",m+"");
+//                    sb.insert(m+1, "\40\40\40");
+//                }
+//                int n=0;
+//                while (sb.indexOf("”",n+2)!=-1){
+//                    n=sb.indexOf("”",n+2);
+//                    Log.i("info",n+"");
+//                    sb.insert(n+1, "\40\40\40");
+//                }
 
                 tv_contents.setText(sb.toString());
+
+
+
+
             }
 
         }

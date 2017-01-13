@@ -131,8 +131,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.ab_search:
                 startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                break;
             case R.id.ab_search_file:
                 startActivity(new Intent(MainActivity.this, ScanBookActivity.class));
+                break;
 
         }
         return super.onOptionsItemSelected(item);
