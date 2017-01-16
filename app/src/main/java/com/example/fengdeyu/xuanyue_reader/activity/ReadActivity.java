@@ -1,47 +1,31 @@
 package com.example.fengdeyu.xuanyue_reader.activity;
 
-import android.annotation.SuppressLint;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
-import android.view.Display;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
+import com.example.fengdeyu.xuanyue_reader.fragment.ReadPageFragment;
+import com.example.fengdeyu.xuanyue_reader.fragment.ReadScrollFragment;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
-import com.example.fengdeyu.xuanyue_reader.other.MyScrollView;
-import com.example.fengdeyu.xuanyue_reader.other.TestPagingActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import static android.R.attr.cacheColorHint;
-import static android.R.attr.fingerprintAuthDrawable;
-import static android.R.attr.statusBarColor;
 
 public class ReadActivity extends AppCompatActivity {
     private ImageView iv_back;
@@ -52,15 +36,18 @@ public class ReadActivity extends AppCompatActivity {
     private LinearLayout ll_book_read_top;
     private LinearLayout ll_book_read_bottom;
 
-    private TextView tv_contents;
 
     private TextView tv_chapter_content;
     private TextView tv_chapter_download;
 
-    private MyScrollView scrollView;
-
-
     private Button btn_paging;          ///////
+
+
+    Fragment mRead;
+
+    public String mContents="";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +55,20 @@ public class ReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read);
 
 
+
         btn_paging= (Button)findViewById(R.id.paging);         //////
 
         btn_paging.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ReadActivity.this, ReadPageActivity.class).putExtra("contents",tv_contents.getText().toString()));
+//                startActivity(new Intent(ReadActivity.this, ReadPageActivity.class).putExtra("contents",tv_contents.getText().toString()));
+
+
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+                mRead = new ReadScrollFragment();
+                transaction.replace(R.id.id_content, mRead);
+                transaction.commit();
 
             }
         });
@@ -92,9 +87,7 @@ public class ReadActivity extends AppCompatActivity {
             }
         });
 
-        scrollView= (MyScrollView) findViewById(R.id.my_scroll_view);
 
-        tv_contents= (TextView) findViewById(R.id.tv_contents);
 
 
 
@@ -121,6 +114,16 @@ public class ReadActivity extends AppCompatActivity {
         });
 
 
+
+
+    }
+
+    private void setDefaultFragment() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        mRead = new ReadPageFragment();
+        transaction.replace(R.id.id_content, mRead);
+        transaction.commit();
     }
 
     @Override
@@ -141,8 +144,6 @@ public class ReadActivity extends AppCompatActivity {
         }
         new loadContentsAsyncTask().execute(url);
 
-        scrollView.scrollTo(0,0);
-
 
     }
 
@@ -159,35 +160,10 @@ public class ReadActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Display display=getWindowManager().getDefaultDisplay();
-
-        float x=event.getX();
-        float y=event.getY();
-
-        int touchEvent = event.getAction();
-
-        switch (touchEvent){
-            case MotionEvent.ACTION_DOWN:
-                Toast.makeText(ReadActivity.this,"Down",Toast.LENGTH_SHORT).show();
-
-            case MotionEvent.ACTION_UP:
-                if(x>display.getWidth()/4&&x<3*display.getWidth()/4&&y>display.getHeight()/4&&y<3*display.getHeight()/4){
-                    toggleReadBar();
-
-                }
-
-                break;
-
-
-        }
-        return super.onTouchEvent(event);
-    }
 
 
 
-    private void toggleReadBar(){
+    public void toggleReadBar(){
         if(ll_book_read_top.getVisibility()==View.GONE){
             ll_book_read_top.setVisibility(View.VISIBLE);
             ll_book_read_bottom.setVisibility(View.VISIBLE);
@@ -250,28 +226,19 @@ public class ReadActivity extends AppCompatActivity {
                     i = sb.indexOf(" ", i + 3);
                     sb.insert(i, "\n");
                 }
-//                int m=0;
-//                while (sb.indexOf("“",m+2)!=-1){
-//                    m=sb.indexOf("“",m+2);
-//                    Log.i("info",m+"");
-//                    sb.insert(m+1, "\40\40\40");
-//                }
-//                int n=0;
-//                while (sb.indexOf("”",n+2)!=-1){
-//                    n=sb.indexOf("”",n+2);
-//                    Log.i("info",n+"");
-//                    sb.insert(n+1, "\40\40\40");
-//                }
-
-                tv_contents.setText(sb.toString());
 
 
+                mContents=sb.toString();
+
+
+                setDefaultFragment();
 
 
             }
 
         }
     }
+
 
 
 }

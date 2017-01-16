@@ -83,6 +83,9 @@ public class PageView extends RelativeLayout {
      */
     private int mEvents;
 
+    //是否点击屏幕中央区域
+    public boolean isClickCenter=false;
+
     public void setAdapter(PageViewAdapter adapter)
     {
         removeAllViews();
@@ -250,7 +253,7 @@ public class PageView extends RelativeLayout {
         }
     }
 
-    private void init()
+    public void init()
     {
         index = 1;
         timer = new Timer();
@@ -266,25 +269,50 @@ public class PageView extends RelativeLayout {
         isCurrMoving = true;
     }
 
+
+    private float down_X=0;
+    private float down_Y=0;
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        super.onTouchEvent(ev);
+        if(ev.getAction()==MotionEvent.ACTION_DOWN){
+            down_X=ev.getX();
+            down_Y=ev.getY();
+        }
+
+        if(ev.getAction()==MotionEvent.ACTION_UP){
+            if(-5<(ev.getX()-down_X)&&(ev.getX()-down_X)<5&&-5<(ev.getY()-down_Y)&&(ev.getY()-down_Y)<5) {
+
+
+                if(down_X>getWidth()/4&&down_X<3*getWidth()/4&&down_Y>getHeight()/4&&down_Y<3*getHeight()/4){
+                    isClickCenter=true;
+                }
+
+            }
+        }
+        return true;
+
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event)
     {
-        if (adapter != null)
-            switch (event.getActionMasked())
-            {
+        if (adapter != null) {
+
+
+            switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
+
+
+
                     lastX = event.getX();
-                    try
-                    {
-                        if (vt == null)
-                        {
+                    try {
+                        if (vt == null) {
                             vt = VelocityTracker.obtain();
-                        } else
-                        {
+                        } else {
                             vt.clear();
                         }
-                    } catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     vt.addMovement(event);
@@ -304,24 +332,20 @@ public class PageView extends RelativeLayout {
                     speed = vt.getXVelocity();
                     moveLenght = event.getX() - lastX;
                     if ((moveLenght > 0 || !isCurrMoving) && isPreMoving
-                            && mEvents == 0)
-                    {
+                            && mEvents == 0) {
                         isPreMoving = true;
                         isCurrMoving = false;
-                        if (index == 1)
-                        {
+                        if (index == 1) {
                             // 第一页不能再往右翻，跳转到前一个activity
                             state = STATE_MOVE;
                             releaseMoving();
-                        } else
-                        {
+                        } else {
                             // 非第一页
                             prePageLeft += (int) moveLenght;
                             // 防止滑过边界
                             if (prePageLeft > 0)
                                 prePageLeft = 0;
-                            else if (prePageLeft < -mWidth)
-                            {
+                            else if (prePageLeft < -mWidth) {
                                 // 边界判断，释放动作，防止来回滑动导致滑动前一页时当前页无法滑动
                                 prePageLeft = -mWidth;
                                 releaseMoving();
@@ -330,23 +354,19 @@ public class PageView extends RelativeLayout {
                             state = STATE_MOVE;
                         }
                     } else if ((moveLenght < 0 || !isPreMoving) && isCurrMoving
-                            && mEvents == 0)
-                    {
+                            && mEvents == 0) {
                         isPreMoving = false;
                         isCurrMoving = true;
-                        if (index == adapter.getCount())
-                        {
+                        if (index == adapter.getCount()) {
                             // 最后一页不能再往左翻
                             state = STATE_STOP;
                             releaseMoving();
-                        } else
-                        {
+                        } else {
                             currPageLeft += (int) moveLenght;
                             // 防止滑过边界
                             if (currPageLeft < -mWidth)
                                 currPageLeft = -mWidth;
-                            else if (currPageLeft > 0)
-                            {
+                            else if (currPageLeft > 0) {
                                 // 边界判断，释放动作，防止来回滑动导致滑动当前页是前一页无法滑动
                                 currPageLeft = 0;
                                 releaseMoving();
@@ -361,23 +381,23 @@ public class PageView extends RelativeLayout {
                     requestLayout();
                     break;
                 case MotionEvent.ACTION_UP:
+
                     if (Math.abs(speed) < speed_shake)
                         speed = 0;
                     quitMove();
                     mTask = new MyTimerTask(updateHandler);
                     timer.schedule(mTask, 0, 5);
-                    try
-                    {
+                    try {
                         vt.clear();
                         vt.recycle();
-                    } catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
                 default:
                     break;
             }
+        }
         super.dispatchTouchEvent(event);
         return true;
     }

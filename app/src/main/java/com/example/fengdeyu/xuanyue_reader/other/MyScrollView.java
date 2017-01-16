@@ -18,8 +18,9 @@ import com.example.fengdeyu.xuanyue_reader.activity.ReadActivity;
 public class MyScrollView extends ScrollView {
     private boolean flag=false;
 
-    float down_X=0;
-    float down_Y=0;
+    public boolean isClickCenter=false;
+
+
 
     public MyScrollView(Context context) {
         super(context);
@@ -34,32 +35,13 @@ public class MyScrollView extends ScrollView {
         super(context, attrs, defStyleAttr);
     }
 
+
+    float down_X=0;
+    float down_Y=0;
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
 
         super.onTouchEvent(ev);
-
-//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-//            return true;
-//        }
-//
-//
-//        if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-//            flag = true;
-//            return true;
-//        }
-//
-//        if (ev.getAction() == MotionEvent.ACTION_UP) {
-//            if (flag) {
-//                flag = false;
-//                return true;
-//            }
-//        }
-//        return false;
-
-
-
-
 
 
 
@@ -69,8 +51,14 @@ public class MyScrollView extends ScrollView {
         }
 
         if(ev.getAction()==MotionEvent.ACTION_UP){
+
             if(-5<(ev.getX()-down_X)&&(ev.getX()-down_X)<5&&-5<(ev.getY()-down_Y)&&(ev.getY()-down_Y)<5) {
-                return false;
+
+                if(down_X>getWidth()/4&&down_X<3*getWidth()/4&&down_Y>getHeight()/4&&down_Y<3*getHeight()/4){
+
+                    isClickCenter=true;
+
+                }
             }
         }
 

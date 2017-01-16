@@ -19,13 +19,38 @@
         />
 
 
+    <!--<TextView-->
+        <!--android:id="@+id/tv_contents"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:padding="30dp"-->
+        <!--android:text=""-->
+        <!--android:textSize="20sp"-->
+        <!--/>-->
+
+
+
+    <FrameLayout
+        android:id="@+id/id_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        ></FrameLayout>
+
+
+
+
     <LinearLayout
         android:id="@+id/ll_book_read_top"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
         android:background="#191919"
         android:orientation="horizontal"
         android:visibility="gone"
+
 
         >
         <ImageView
@@ -75,25 +100,18 @@
     </LinearLayout>
 
 
-    <com.example.fengdeyu.xuanyue_reader.other.MyScrollView
-        android:id="@+id/my_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/tv_contents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:padding="30dp"
-            android:text=""
-            android:textSize="20sp"
-            />
 
 
+    <!--<com.example.fengdeyu.xuanyue_reader.view.PageView-->
+        <!--android:id="@+id/pageView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"></com.example.fengdeyu.xuanyue_reader.view.PageView>-->
 
-    </com.example.fengdeyu.xuanyue_reader.other.MyScrollView>
-
+    <!--<fragment-->
+        <!--android:id="@+id/id_content"-->
+        <!--android:name="com.example.fengdeyu.xuanyue_reader.fragment.ReadPageFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 
 

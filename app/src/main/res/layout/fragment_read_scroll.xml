@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<com.example.fengdeyu.xuanyue_reader.other.MyScrollView-->
+        <!--android:id="@+id/my_scroll_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_contents"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:padding="30dp"-->
+            <!--android:text=""-->
+            <!--android:textSize="20sp"-->
+            <!--/>-->
+        <!--<com.example.fengdeyu.xuanyue_reader.view.MyTextView-->
+            <!--android:id="@+id/tv_contents"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:padding="30dp"-->
+            <!--android:text=""-->
+            <!--android:textSize="20sp"-->
+
+             <!--/>-->
+
+    <!--</com.example.fengdeyu.xuanyue_reader.other.MyScrollView>-->
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:scrollbars="none"
+        >
+        <TextView
+            android:id="@+id/tv_contents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="24dp"
+            android:text=""
+            android:textSize="20sp"
+            />
+
+    </ScrollView>
+</LinearLayout>
