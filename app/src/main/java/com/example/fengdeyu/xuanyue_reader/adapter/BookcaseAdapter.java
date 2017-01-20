@@ -2,6 +2,7 @@ package com.example.fengdeyu.xuanyue_reader.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,10 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
     @Override
     public void onBindViewHolder(final BookcaseAdapter.bookcaseViewHolder holder, final int position) {
         holder.book_icon.setImageResource(R.mipmap.book_icon);
-        new ImageLoader().showImageByThread(holder.book_icon,mList.get(position).bookIconUrl);
-
+        if(!mList.get(position).bookIconUrl.equals("")) {
+            new ImageLoader().showImageByThread(holder.book_icon, mList.get(position).bookIconUrl);
+            Log.i("info","true");
+        }
         holder.book_title.setText(mList.get(position).bookTitle);
         holder.book_author.setText(mList.get(position).bookAuthor);
         holder.book_content.setText(mList.get(position).bookContent);

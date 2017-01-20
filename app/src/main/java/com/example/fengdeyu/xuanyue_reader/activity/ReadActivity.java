@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -206,8 +207,11 @@ public class ReadActivity extends AppCompatActivity {
             }
 
             try {
+//                String contents="123";
                 Document doc= Jsoup.connect(params[0]).get();
                 String contents=doc.getElementById("contents").text();
+//                Log.i("info",params[0]);
+//                Log.i("info",doc.toString());
                 return contents;
             } catch (IOException e) {
                 e.printStackTrace();

@@ -22,13 +22,12 @@ public class GuideViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        //super.destroyItem(container, position, object);
+
         container.removeView(mViews.get(position));
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        //return super.instantiateItem(container, position);
         container.addView(mViews.get(position));
         return mViews.get(position);
     }

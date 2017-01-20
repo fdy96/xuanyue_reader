@@ -8,12 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.adapter.ScanBookAdapter;
+import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.bean.ChapterContentBean;
 import com.example.fengdeyu.xuanyue_reader.bean.ScanBookBean;
+import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,6 +33,7 @@ public class ScanBookActivity extends AppCompatActivity {
 
     private ImageView iv_back;
     private TextView tv_select_all;
+    private Button btn_load_book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class ScanBookActivity extends AppCompatActivity {
         });
 
         tv_select_all= (TextView) findViewById(R.id.tv_select_all);
-
+        btn_load_book= (Button) findViewById(R.id.btn_load_book);
 
 
     }
@@ -110,6 +116,32 @@ public class ScanBookActivity extends AppCompatActivity {
 
                 }
             });
+            btn_load_book.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for (ScanBookBean scanBookBean:mList){
+                        if(scanBookBean.isSelect==true){
+                            BookItemBean bookItemBean=new BookItemBean();
+                            bookItemBean.bookTitle=scanBookBean.fileName;
+                            bookItemBean.bookAuthor="本地";
+//                            bookItemBean.bookIconUrl=GetBookCase.getInstance().mList.get(0).bookIconUrl;
+                            bookItemBean.bookHref=scanBookBean.filePath;
+                            ChapterContentBean chapterContentBean=new ChapterContentBean();
+                            chapterContentBean.isDownload=true;
+                            chapterContentBean.chapter_local_url=bookItemBean.bookHref;
+                            bookItemBean.mChapterList.add(chapterContentBean);
+                            if(GetBookCase.getInstance().hasBook(bookItemBean)){
+                                Toast.makeText(ScanBookActivity.this,"此书已在书架,请勿重复添加!",Toast.LENGTH_SHORT).show();
+                            }else {
+                                GetBookCase.getInstance().mList.add(bookItemBean);
+
+                                Toast.makeText(ScanBookActivity.this,"加入书架成功!",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    }
+                }
+            });
 
 
 
@@ -152,6 +184,7 @@ public class ScanBookActivity extends AppCompatActivity {
                                         size=(int)(size*100)/100.0f;
                                         scanBookBean.fileSize=size+"B";
                                     }
+                                    scanBookBean.filePath=files[i].getPath();
 
 
 

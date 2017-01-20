@@ -7,6 +7,7 @@ package com.example.fengdeyu.xuanyue_reader.bean;
 public class ScanBookBean {
     public String fileName;
     public String fileSize;
+    public String filePath;
     public boolean isSelect;
 
 }

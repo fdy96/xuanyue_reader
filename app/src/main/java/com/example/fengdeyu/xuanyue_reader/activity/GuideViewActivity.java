@@ -16,48 +16,61 @@ import com.example.fengdeyu.xuanyue_reader.adapter.GuideViewPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 开始引导页，第一次安装时打开，负责介绍app的特点作用
+ */
 public class GuideViewActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
 
-    private List<View> mViews;
-    private GuideViewPagerAdapter guideViewPagerAdapter;
-    private ViewPager vp_guide;
+    private List<View> mViews;      //引导页的N个布局页面
+    private ViewPager vp_guide;     //存放页面的viewpager
 
-    private ImageView[] dots=new ImageView[3];
-    private int[] ids={R.id.iv_dot1,R.id.iv_dot2,R.id.iv_dot3};
+    private ImageView[] dots=new ImageView[3];     //三个点
+    private int[] ids={R.id.iv_dot1,R.id.iv_dot2,R.id.iv_dot3};     //三个点的id
 
-    private Button btn_start;
+    private Button btn_start;       //跳转按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_view);
 
+        vp_guide= (ViewPager) findViewById(R.id.vp_guide);
+        for(int i=0;i<3;i++){
+            dots[i]= (ImageView) findViewById(ids[i]);
+        }
+        btn_start= (Button) mViews.get(2).findViewById(R.id.btn_start);
+        //初始化控件
+
+
         LayoutInflater layoutInflater=LayoutInflater.from(this);
         mViews=new ArrayList<>();
         mViews.add(layoutInflater.inflate(R.layout.one,null));
         mViews.add(layoutInflater.inflate(R.layout.two,null));
         mViews.add(layoutInflater.inflate(R.layout.three,null));
+        //添加布局视图
 
-        guideViewPagerAdapter=new GuideViewPagerAdapter(mViews,this);
-        vp_guide= (ViewPager) findViewById(R.id.vp_guide);
-        vp_guide.setAdapter(guideViewPagerAdapter);
-        vp_guide.setOnPageChangeListener(this);
+        GuideViewPagerAdapter guideViewPagerAdapter=new GuideViewPagerAdapter(mViews,this);
 
-        for(int i=0;i<3;i++){
-            dots[i]= (ImageView) findViewById(ids[i]);
-        }
+        vp_guide.setAdapter(guideViewPagerAdapter);         //添加适配器
 
-        btn_start= (Button) mViews.get(2).findViewById(R.id.btn_start);
+        vp_guide.setOnPageChangeListener(this);             //监听事件
+
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GuideViewActivity.this,MainActivity.class));
+                startActivity(new Intent(GuideViewActivity.this,MainActivity.class));  //跳转到主界面
                 finish();
             }
         });
 
     }
 
+    /**
+     * 滚动之后，改变点的图片
+     * @param position  当前选择布局
+     * @param positionOffset
+     * @param positionOffsetPixels
+     */
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

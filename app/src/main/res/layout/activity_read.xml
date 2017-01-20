@@ -9,14 +9,7 @@
     tools:context="com.example.fengdeyu.xuanyue_reader.activity.ReadActivity">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="分页"
-        android:id="@+id/paging"
 
-        />
 
 
     <!--<TextView-->
@@ -39,7 +32,14 @@
         ></FrameLayout>
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="分页"
+        android:id="@+id/paging"
 
+        />
 
     <LinearLayout
         android:id="@+id/ll_book_read_top"
