@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,16 +22,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.SearchResultActivity" />
-        <activity android:name=".activity.BookIntroActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SearchResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BookIntroActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ReadActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+        <activity
+            android:name=".activity.ReadLocalBookActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity android:name=".other.ConnectTestActivity" />
+        <activity
+            android:name=".activity.ReadOnlineBookActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity
             android:name=".activity.ChapterContentActivity"
             android:theme="@style/DialogTheme" />
@@ -39,17 +64,20 @@
             android:theme="@style/DialogTheme" />
         <activity
             android:name=".activity.GuideViewActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
         <activity android:name=".other.DownloadTestActivity" />
         <activity android:name=".other.SearchFileTestActivity" />
-        <activity android:name=".activity.ScanBookActivity" />
-        <activity android:name=".activity.SettingActivity" />
+        <activity
+            android:name=".activity.ScanBookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".other.TestPagingActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".activity.ReadPageActivity"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen"
-            ></activity>
+        <activity android:name=".activity.TypefaceSelectActivity" />
     </application>
 
 </manifest>

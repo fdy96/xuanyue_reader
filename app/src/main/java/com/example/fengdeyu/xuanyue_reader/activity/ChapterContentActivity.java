@@ -57,7 +57,11 @@ public class ChapterContentActivity extends Activity {
             public void onItemClick(View view, int position) {
 
                 GetChapterContent.getInstance().currentChapter=position;
+
+                getSharedPreferences("setting_pref",MODE_PRIVATE).edit().putBoolean("isChanged",true).commit();
+
                 onBackPressed();
+
 
             }
         });

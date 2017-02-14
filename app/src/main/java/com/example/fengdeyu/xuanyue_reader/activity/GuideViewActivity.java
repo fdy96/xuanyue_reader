@@ -38,8 +38,7 @@ public class GuideViewActivity extends AppCompatActivity implements ViewPager.On
         for(int i=0;i<3;i++){
             dots[i]= (ImageView) findViewById(ids[i]);
         }
-        btn_start= (Button) mViews.get(2).findViewById(R.id.btn_start);
-        //初始化控件
+
 
 
         LayoutInflater layoutInflater=LayoutInflater.from(this);
@@ -48,6 +47,9 @@ public class GuideViewActivity extends AppCompatActivity implements ViewPager.On
         mViews.add(layoutInflater.inflate(R.layout.two,null));
         mViews.add(layoutInflater.inflate(R.layout.three,null));
         //添加布局视图
+
+        btn_start= (Button) mViews.get(2).findViewById(R.id.btn_start);
+        //初始化控件
 
         GuideViewPagerAdapter guideViewPagerAdapter=new GuideViewPagerAdapter(mViews,this);
 

@@ -17,6 +17,7 @@ public class BookItemBean{
     public String bookContent="";
     public String bookHref="";
     public int currentChapter=0;
+    public float rate=0;            //阅读进度
     public String bookIntro;
     public List<ChapterContentBean> mChapterList=new ArrayList<>();
 

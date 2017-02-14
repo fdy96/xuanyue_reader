@@ -1,40 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<com.example.fengdeyu.xuanyue_reader.other.MyScrollView-->
-        <!--android:id="@+id/my_scroll_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tv_contents"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:padding="30dp"-->
-            <!--android:text=""-->
-            <!--android:textSize="20sp"-->
-            <!--/>-->
-        <!--<com.example.fengdeyu.xuanyue_reader.view.MyTextView-->
-            <!--android:id="@+id/tv_contents"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:padding="30dp"-->
-            <!--android:text=""-->
-            <!--android:textSize="20sp"-->
-
-             <!--/>-->
-
-    <!--</com.example.fengdeyu.xuanyue_reader.other.MyScrollView>-->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="34dp"
         android:scrollbars="none"
         >
         <TextView
@@ -49,4 +23,43 @@
             />
 
     </ScrollView>
-</LinearLayout>
+
+    <TextView
+        android:text="第一章 仙人"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:text="15:23"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
+
+
+    <TextView
+        android:text="68"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="32dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#777777"
+        android:background="@mipmap/ic_battery" />
+    <TextView
+        android:text="第2/12页"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="8dp" />
+</RelativeLayout>

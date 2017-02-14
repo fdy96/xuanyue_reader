@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#8b0000"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="8dp"
+            android:src="@mipmap/ab_back"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+
+        <TextView
+            android:layout_width="122dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:text="选择字体"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_weight="1" />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+        </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_typeface_1"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="方正细黑"
+            android:textSize="24sp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_select_1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_checkbox_normal"
+            android:layout_alignParentRight="true"
+            android:layout_margin="12dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_typeface_2"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="方正硬笔楷书"
+            android:textSize="24sp"
+            />
+        <ImageView
+            android:id="@+id/iv_select_2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_checkbox_normal"
+            android:layout_alignParentRight="true"
+            android:layout_margin="12dp"
+            />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_typeface_3"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汉仪报宋体"
+            android:textSize="24sp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_select_3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@mipmap/ic_checkbox_normal"
+            android:layout_alignParentRight="true"
+            android:layout_margin="12dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+    </RelativeLayout>
+
+
+
+
+
+
+
+</LinearLayout>

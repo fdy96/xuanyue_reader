@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,8 +54,17 @@ public class MainActivity extends AppCompatActivity {
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    item.setCheckable(true);
+                    //item.setCheckable(true);
                     mDrawerLayout.closeDrawers();
+
+                    switch (item.getItemId()){
+                        case R.id.setting:
+                            Log.i("info","setting");
+                            startActivity(new Intent(MainActivity.this,SettingActivity.class));
+                            break;
+                    }
+
+
                     return true;
                 }
             });

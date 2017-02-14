@@ -96,8 +96,7 @@ public class BookIntroActivity extends AppCompatActivity {
             btn_start_read.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(BookIntroActivity.this,ReadActivity.class);
-                    intent.putExtra("intoWay","bookIntro");
+                    Intent intent=new Intent(BookIntroActivity.this,ReadOnlineBookActivity.class);
                     GetChapterContent.getInstance().currentChapter=0;
                     GetChapterContent.getInstance().bookTitle=getIntent().getStringExtra("bookTitle");
                     startActivity(intent);

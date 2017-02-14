@@ -1,27 +1,24 @@
 package com.example.fengdeyu.xuanyue_reader.fragment;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
-import com.example.fengdeyu.xuanyue_reader.activity.BookIntroActivity;
 import com.example.fengdeyu.xuanyue_reader.activity.ReadActivity;
+import com.example.fengdeyu.xuanyue_reader.activity.ReadLocalBookActivity;
+import com.example.fengdeyu.xuanyue_reader.activity.ScanBookActivity;
 import com.example.fengdeyu.xuanyue_reader.adapter.BookcaseAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by fengdeyu on 2016/11/23.
@@ -49,8 +46,9 @@ public class BookcaseFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
-        bookcaseAdapter=new BookcaseAdapter(getActivity(), GetBookCase.getInstance().mList);
-
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        bookcaseAdapter=new BookcaseAdapter(getActivity(), GetBookCase.getInstance().mList,dm.widthPixels);
 
         mRecyclerView.setAdapter(bookcaseAdapter);
 
@@ -60,9 +58,16 @@ public class BookcaseFragment extends Fragment {
 
                 GetChapterContent.getInstance().currentChapter=GetBookCase.getInstance().mList.get(position).currentChapter;
                 GetChapterContent.getInstance().bookTitle=GetBookCase.getInstance().mList.get(position).bookTitle;
-                startActivity(new Intent(getActivity(), ReadActivity.class).putExtra("bookId",position).putExtra("intoWay","bookCase"));
+                if(GetBookCase.getInstance().mList.get(position).bookAuthor.equals("本地")){
+                    startActivity(new Intent(getActivity(), ReadLocalBookActivity.class).putExtra("bookId",position).putExtra("intoWay","bookCase"));
+                }else{
+                    startActivity(new Intent(getActivity(), ReadActivity.class).putExtra("bookId",position).putExtra("intoWay","bookCase"));
+                }
             }
+
+
         });
+
     }
 
     @Override

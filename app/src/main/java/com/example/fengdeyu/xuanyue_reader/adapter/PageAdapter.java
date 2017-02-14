@@ -15,6 +15,8 @@ public abstract class PageAdapter
 
     public abstract int getCount();
 
+    public abstract int getCurrentPage();
+
     /**
      * 将内容添加到view中
      *

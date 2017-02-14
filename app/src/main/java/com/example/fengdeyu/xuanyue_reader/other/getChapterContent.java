@@ -47,7 +47,7 @@ public class GetChapterContent {
 
                     if(!link.text().equals("")) {
                         chapterContentBean.chapter_name = link.text();
-                        chapterContentBean.chapter_url="http://www.23us.so"+href.attr("href");
+                        chapterContentBean.chapter_url=href.attr("href");
                         mList.add(chapterContentBean);
                     }
                 }

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.example.fengdeyu.xuanyue_reader.adapter.PageAdapter;
 import com.example.fengdeyu.xuanyue_reader.adapter.PageViewAdapter;
+import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -90,6 +91,11 @@ public class PageView extends RelativeLayout {
     {
         removeAllViews();
         this.adapter = adapter;
+
+
+        index=adapter.getCurrentPage();
+
+
         prePage = adapter.getView();
         addView(prePage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
@@ -138,6 +144,7 @@ public class PageView extends RelativeLayout {
      */
     private void moveRight(int which)
     {
+
         switch (which)
         {
             case PRE:
@@ -160,6 +167,8 @@ public class PageView extends RelativeLayout {
      */
     private void addPrePage()
     {
+        GetPageAttribute.getInstance().rate=(float)index/adapter.getCount();
+
         removeView(nextPage);
         addView(nextPage, -1, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
@@ -178,6 +187,8 @@ public class PageView extends RelativeLayout {
      */
     private void addNextPage()
     {
+        GetPageAttribute.getInstance().rate=(float)index/adapter.getCount();
+
         removeView(prePage);
         addView(prePage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
@@ -251,6 +262,8 @@ public class PageView extends RelativeLayout {
             mTask.cancel();
             mTask = null;
         }
+
+
     }
 
     public void init()
@@ -289,6 +302,7 @@ public class PageView extends RelativeLayout {
                 }
 
             }
+
         }
         return true;
 
@@ -389,7 +403,7 @@ public class PageView extends RelativeLayout {
                     timer.schedule(mTask, 0, 5);
                     try {
                         vt.clear();
-                        vt.recycle();
+//                        vt.recycle();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -417,7 +431,7 @@ public class PageView extends RelativeLayout {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         LinearGradient linearGradient = new LinearGradient(right, 0,
-                right + 36, 0, 0xffbbbbbb, 0x00bbbbbb, Shader.TileMode.CLAMP);
+                right + 36, 0, 0x88555555, 0x00ffffff, Shader.TileMode.CLAMP);
         paint.setShader(linearGradient);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(rectF, paint);

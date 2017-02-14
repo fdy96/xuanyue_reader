@@ -3,6 +3,7 @@ package com.example.fengdeyu.xuanyue_reader.adapter;
 import android.content.Context;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class ScanBookAdapter extends RecyclerView.Adapter<ScanBookAdapter.scanBookViewHolder> {
     private Context mContext;
-    private List<ScanBookBean> mList;
+    public List<ScanBookBean> mList;
 
     public ScanBookAdapter(Context mContext, List<ScanBookBean> mList) {
         this.mContext = mContext;
@@ -72,6 +73,8 @@ public class ScanBookAdapter extends RecyclerView.Adapter<ScanBookAdapter.scanBo
 
     @Override
     public int getItemCount() {
+//
+        Log.i("mList.size",""+mList.size());
         return mList.size();
     }
 

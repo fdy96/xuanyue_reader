@@ -12,6 +12,7 @@ import com.example.fengdeyu.xuanyue_reader.adapter.ChapterContentAdapter;
 import com.example.fengdeyu.xuanyue_reader.other.DownloadServer;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
+import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
 
 public class ChapterDownloadActivity extends Activity {
 
@@ -33,6 +34,8 @@ public class ChapterDownloadActivity extends Activity {
                     @Override
                     public void run() {
                         super.run();
+                        GetPageAttribute.getInstance().isDownloading=true;
+                        GetPageAttribute.getInstance().downloadNum=50;
                         new DownloadServer(getIntent().getIntExtra("bookId",0),GetChapterContent.getInstance().currentChapter,
                                 GetChapterContent.getInstance().currentChapter+50,ChapterDownloadActivity.this).download();
                     }
@@ -49,6 +52,8 @@ public class ChapterDownloadActivity extends Activity {
                     @Override
                     public void run() {
                         super.run();
+                        GetPageAttribute.getInstance().isDownloading=true;
+                        GetPageAttribute.getInstance().downloadNum=GetBookCase.getInstance().mList.get(getIntent().getIntExtra("bookId",0)).mChapterList.size()-GetChapterContent.getInstance().currentChapter;
                         new DownloadServer(getIntent().getIntExtra("bookId",0),GetChapterContent.getInstance().currentChapter,
                                 GetBookCase.getInstance().mList.get(getIntent().getIntExtra("bookId",0)).mChapterList.size(),ChapterDownloadActivity.this).download();
                     }
@@ -65,6 +70,8 @@ public class ChapterDownloadActivity extends Activity {
                     @Override
                     public void run() {
                         super.run();
+                        GetPageAttribute.getInstance().isDownloading=true;
+                        GetPageAttribute.getInstance().downloadNum=GetBookCase.getInstance().mList.get(getIntent().getIntExtra("bookId",0)).mChapterList.size();
                         new DownloadServer(getIntent().getIntExtra("bookId",0),0,
                                 GetBookCase.getInstance().mList.get(getIntent().getIntExtra("bookId",0)).mChapterList.size(),ChapterDownloadActivity.this).download();
                     }

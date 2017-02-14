@@ -86,6 +86,9 @@ public class DownloadServer {
             num++;
             Log.i("info",num+"");
 
+            GetPageAttribute.getInstance().downloadedNum=num;
+
+
         }
     }
     public String getDirPath(){

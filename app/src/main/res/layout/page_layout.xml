@@ -2,17 +2,71 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/theme_leather_bg">
+
+    android:id="@+id/rl_page_layout"
+    android:background="#C9C9C9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
 
     <TextView
         android:id="@+id/tv_contents"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="25dp"
         android:text=""
-        android:textSize="20sp"
+        android:textSize="12sp"
+
         />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_chapter_name"
+        android:text="第一章 仙人"
+        android:textColor="#844200"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tv_current_time"
+        android:text="15:23"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
+
+
+    <TextView
+        android:id="@+id/tv_current_battery"
+        android:text="68"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="30dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="20dp"
+        android:backgroundTint="#777777"
+        android:background="@mipmap/ic_battery" />
+    <TextView
+        android:id="@+id/tv_page_num"
+        android:text="第2/12页"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="8dp" />
+
 
 </RelativeLayout>
