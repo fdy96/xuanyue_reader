@@ -87,6 +87,14 @@ public class PageView extends RelativeLayout {
     //是否点击屏幕中央区域
     public boolean isClickCenter=false;
 
+    //是否点击屏幕左边区域
+    private boolean isClickLeft=false;
+
+    //是否点击屏幕右边区域
+    private boolean isClickRight=false;
+
+
+
     public void setAdapter(PageViewAdapter adapter)
     {
         removeAllViews();
@@ -212,15 +220,15 @@ public class PageView extends RelativeLayout {
                 return;
             // 移动页面
             // 翻回，先判断当前哪一页处于未返回状态
-            if (prePageLeft > -mWidth && speed <= 0)
+            if (prePageLeft > -mWidth && speed <= 0&&!isClickLeft)
             {
                 // 前一页处于未返回状态
                 moveLeft(PRE);
-            } else if (currPageLeft < 0 && speed >= 0)
+            } else if (currPageLeft < 0 && speed >= 0&&!isClickRight)
             {
                 // 当前页处于未返回状态
                 moveRight(CURR);
-            } else if (speed < 0 && index < adapter.getCount())
+            } else if (speed < 0 && index < adapter.getCount()&&!isClickLeft)
             {
                 // 向左翻，翻动的是当前页
                 moveLeft(CURR);
@@ -230,7 +238,7 @@ public class PageView extends RelativeLayout {
                     // 翻过一页，在底下添加一页，把最上层页面移除
                     addNextPage();
                 }
-            } else if (speed > 0 && index > 1)
+            } else if (speed > 0 && index > 1&&!isClickRight)
             {
                 // 向右翻，翻动的是前一页
                 moveRight(PRE);
@@ -241,6 +249,34 @@ public class PageView extends RelativeLayout {
                     addPrePage();
                 }
             }
+           else if (isClickRight && index < adapter.getCount())
+            {
+                // 向左翻，翻动的是当前页
+                moveLeft(CURR);
+                if (currPageLeft == (-mWidth))
+                {
+                    index++;
+                    // 翻过一页，在底下添加一页，把最上层页面移除
+                    addNextPage();
+                }
+            } else if (isClickLeft && index > 1)
+            {
+                // 向右翻，翻动的是前一页
+                moveRight(PRE);
+                if (prePageLeft == 0)
+                {
+                    index--;
+                    // 翻回一页，添加一页在最上层，隐藏在最左边
+                    addPrePage();
+                }
+            }
+
+
+
+
+
+
+
             if (right == 0 || right == mWidth)
             {
                 releaseMoving();
@@ -280,6 +316,11 @@ public class PageView extends RelativeLayout {
     {
         isPreMoving = true;
         isCurrMoving = true;
+
+
+        isClickLeft=false;
+        isClickRight=false;
+
     }
 
 
@@ -296,12 +337,33 @@ public class PageView extends RelativeLayout {
         if(ev.getAction()==MotionEvent.ACTION_UP){
             if(-5<(ev.getX()-down_X)&&(ev.getX()-down_X)<5&&-5<(ev.getY()-down_Y)&&(ev.getY()-down_Y)<5) {
 
-
                 if(down_X>getWidth()/4&&down_X<3*getWidth()/4&&down_Y>getHeight()/4&&down_Y<3*getHeight()/4){
                     isClickCenter=true;
                 }
+                if(down_X<getWidth()/4){                                //点击屏幕左边
+                    isClickLeft=true;
+                    if(index==1) {
+                        Log.i("info", "已经是第一页3");
+                    }
+                    state=STATE_MOVE;
+                }
+                if (down_X>3*getWidth()/4){                             //点击屏幕右边
+                    isClickRight=true;
+                    if(index==adapter.getCount()) {
+                        Log.i("info", "已经是最后一页3");
+                    }
+                    state=STATE_MOVE;
+                }
 
             }
+            if (currPageLeft<-mWidth/2){                                //向左翻页已过半，处理等同点击屏幕右边
+                isClickRight=true;
+            }
+            if (prePageLeft>-mWidth/2){                                 //向右翻页已过半，处理等同点击屏幕左边
+                isClickLeft=true;
+            }
+
+
 
         }
         return true;
@@ -350,6 +412,7 @@ public class PageView extends RelativeLayout {
                         isPreMoving = true;
                         isCurrMoving = false;
                         if (index == 1) {
+                            Log.i("info","已经是第一页2");
                             // 第一页不能再往右翻，跳转到前一个activity
                             state = STATE_MOVE;
                             releaseMoving();
@@ -372,6 +435,7 @@ public class PageView extends RelativeLayout {
                         isPreMoving = false;
                         isCurrMoving = true;
                         if (index == adapter.getCount()) {
+                            Log.i("info","已经是最后一页2");
                             // 最后一页不能再往左翻
                             state = STATE_STOP;
                             releaseMoving();

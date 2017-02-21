@@ -85,6 +85,9 @@ public class ReadPageFragment extends Fragment {
 
 
 
+
+
+
     }
 
 
@@ -92,6 +95,7 @@ public class ReadPageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
 
         int mHeight=getActivity().getResources().getDisplayMetrics().heightPixels;
         int mWidth=getActivity().getResources().getDisplayMetrics().widthPixels;

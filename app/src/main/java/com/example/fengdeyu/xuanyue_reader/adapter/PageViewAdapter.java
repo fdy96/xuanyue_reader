@@ -81,6 +81,14 @@ public class PageViewAdapter extends PageAdapter {
 
     @Override
     public void addContent(View view, int position) {
+        if (position-1<0){
+            Log.i("info","已经是第一页1");
+            return;
+        }
+        if (position-1>=getCount()){
+            Log.i("info","已经是最后一页1");
+            return;
+        }
 
 
         TextView tv_contents = (TextView) view.findViewById(R.id.tv_contents);
@@ -90,8 +98,7 @@ public class PageViewAdapter extends PageAdapter {
         TextView tv_current_battery= (TextView) view.findViewById(R.id.tv_current_battery);
         RelativeLayout rl_page_layout= (RelativeLayout) view.findViewById(R.id.rl_page_layout);
 
-        if ((position - 1) < 0 || (position - 1) >= getCount())
-            return;
+
         tv_contents.setText(mList.get(position - 1));
         tv_contents.setTextSize(GetPageAttribute.getInstance().textSize);
         Typeface tf=Typeface.createFromAsset(mContext.getAssets(),GetPageAttribute.getInstance().font_typeface);

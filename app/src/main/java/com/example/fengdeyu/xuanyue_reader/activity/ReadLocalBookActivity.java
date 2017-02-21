@@ -254,9 +254,10 @@ public class ReadLocalBookActivity extends AppCompatActivity implements MyReadIn
                     GetPageAttribute.getInstance().textSize=32;
                 }else {
                     GetPageAttribute.getInstance().textSize+=2;
+                    setDefaultFragment();
                 }
 
-                setDefaultFragment();
+
 
             }
         });
@@ -266,13 +267,14 @@ public class ReadLocalBookActivity extends AppCompatActivity implements MyReadIn
         iv_font_size_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (GetPageAttribute.getInstance().textSize==8){
-                    GetPageAttribute.getInstance().textSize=8;
+                if (GetPageAttribute.getInstance().textSize==10){
+                    GetPageAttribute.getInstance().textSize=10;
                 }else {
                     GetPageAttribute.getInstance().textSize-=2;
+                    setDefaultFragment();
                 }
 
-                setDefaultFragment();
+
             }
         });
 
