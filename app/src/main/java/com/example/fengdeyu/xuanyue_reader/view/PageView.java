@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 
 import com.example.fengdeyu.xuanyue_reader.adapter.PageAdapter;
 import com.example.fengdeyu.xuanyue_reader.adapter.PageViewAdapter;
+import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
+import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
 
 import java.util.Timer;
@@ -118,6 +120,9 @@ public class PageView extends RelativeLayout {
         addView(nextPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
         adapter.addContent(nextPage, index + 1);
+
+
+
 
     }
 
@@ -344,13 +349,32 @@ public class PageView extends RelativeLayout {
                     isClickLeft=true;
                     if(index==1) {
                         Log.i("info", "已经是第一页3");
+                        if(GetChapterContent.getInstance().currentChapter!=0) {
+                            GetPageAttribute.getInstance().rate = 1;
+                            GetPageAttribute.getInstance().isChanged=true;
+                            adapter.dataUpdate(-1);
+                        }
                     }
+
                     state=STATE_MOVE;
                 }
                 if (down_X>3*getWidth()/4){                             //点击屏幕右边
                     isClickRight=true;
                     if(index==adapter.getCount()) {
                         Log.i("info", "已经是最后一页3");
+                        if(GetPageAttribute.getInstance().source.equals("book_case")) {
+                            if (GetChapterContent.getInstance().currentChapter != GetBookCase.getInstance().mList.get(GetPageAttribute.getInstance().bookId).mChapterList.size()-1) {
+                                GetPageAttribute.getInstance().rate = 0;
+                                GetPageAttribute.getInstance().isChanged=true;
+                                adapter.dataUpdate(1);
+                            }
+                        }else if(GetPageAttribute.getInstance().source.equals("book_intro")){
+                            if (GetChapterContent.getInstance().currentChapter != GetChapterContent.getInstance().mList.size()-1) {
+                                GetPageAttribute.getInstance().rate = 0;
+                                GetPageAttribute.getInstance().isChanged=true;
+                                adapter.dataUpdate(1);
+                            }
+                        }
                     }
                     state=STATE_MOVE;
                 }
@@ -412,7 +436,17 @@ public class PageView extends RelativeLayout {
                         isPreMoving = true;
                         isCurrMoving = false;
                         if (index == 1) {
+
+
                             Log.i("info","已经是第一页2");
+                            if(GetChapterContent.getInstance().currentChapter!=0) {
+                                GetPageAttribute.getInstance().rate = 1;
+                                GetPageAttribute.getInstance().isChanged=true;
+                                adapter.dataUpdate(-1);
+                            }
+
+
+
                             // 第一页不能再往右翻，跳转到前一个activity
                             state = STATE_MOVE;
                             releaseMoving();
@@ -435,7 +469,24 @@ public class PageView extends RelativeLayout {
                         isPreMoving = false;
                         isCurrMoving = true;
                         if (index == adapter.getCount()) {
+
+
                             Log.i("info","已经是最后一页2");
+                            if(GetPageAttribute.getInstance().source.equals("book_case")) {
+                                if (GetChapterContent.getInstance().currentChapter != GetBookCase.getInstance().mList.get(GetPageAttribute.getInstance().bookId).mChapterList.size()-1) {
+                                    GetPageAttribute.getInstance().rate = 0;
+                                    GetPageAttribute.getInstance().isChanged=true;
+                                    adapter.dataUpdate(1);
+                                }
+                            }else if(GetPageAttribute.getInstance().source.equals("book_intro")){
+                                if (GetChapterContent.getInstance().currentChapter != GetChapterContent.getInstance().mList.size()-1) {
+                                    GetPageAttribute.getInstance().rate = 0;
+                                    GetPageAttribute.getInstance().isChanged=true;
+                                    adapter.dataUpdate(1);
+                                }
+                            }
+
+
                             // 最后一页不能再往左翻
                             state = STATE_STOP;
                             releaseMoving();

@@ -38,23 +38,7 @@
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:layout_weight="1" />
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#555555"
-            />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
-            android:padding="8dp"
-            android:text="缓存全本"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            />
 
 
     </LinearLayout>

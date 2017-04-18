@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
+import com.example.fengdeyu.xuanyue_reader.other.ConnectTestActivity;
 import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
 
 /**
@@ -28,9 +29,9 @@ public class StartActivity extends Activity {
 
     public int battery;
     //注册广播接受者java代码
-    IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    IntentFilter filter;
     //创建广播接受者对象
-    BatteryReceiver receiver=new BatteryReceiver();
+    BatteryReceiver receiver;
 
     /**
      * 广播接受者
@@ -65,6 +66,8 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
 
 
+        filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        receiver=new BatteryReceiver();
 
         registerReceiver(receiver,filter);
         GetPageAttribute.getInstance().battery=battery;

@@ -57,14 +57,16 @@ public class DownloadServer {
             String contents="";
             try {
                 doc = Jsoup.connect(s).get();
-                String str_contents = doc.getElementById("contents").text();
-                StringBuilder sb = new StringBuilder(str_contents);
+                contents = doc.getElementById("content").text();
+
+                StringBuilder sb = new StringBuilder(contents);
                 int i = 0;
                 while (sb.indexOf(" ", i + 3) != -1) {
                     i = sb.indexOf(" ", i + 3);
                     sb.insert(i, "\n");
                 }
                 contents=sb.toString();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

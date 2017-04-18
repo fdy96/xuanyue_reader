@@ -43,7 +43,9 @@
             android:imeOptions="actionSearch"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:focusableInTouchMode="true"
+            />
 
         <View
             android:layout_width="0.5dp"
@@ -73,11 +75,6 @@
                 android:id="@+id/bookitem_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-
-
-
-
 
     </ScrollView>
 

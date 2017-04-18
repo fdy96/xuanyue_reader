@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="horizontal"
+        android:weightSum="2"
         >
         <ImageView
             android:id="@+id/iv_book_icon"
@@ -42,10 +43,11 @@
             />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:orientation="vertical"
+            android:layout_weight="1.2"
             >
 
             <TextView
@@ -77,6 +79,15 @@
 
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/tv_proceed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#ae8f00"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            />
 
 
     </LinearLayout>

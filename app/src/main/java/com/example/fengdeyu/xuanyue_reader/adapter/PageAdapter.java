@@ -17,6 +17,8 @@ public abstract class PageAdapter
 
     public abstract int getCurrentPage();
 
+    public abstract void dataUpdate(int i);
+
     /**
      * 将内容添加到view中
      *
@@ -26,4 +28,6 @@ public abstract class PageAdapter
      *            第position页
      */
     public abstract void addContent(View view, int position);
+
+
 }

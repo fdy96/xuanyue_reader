@@ -15,9 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.fengdeyu.xuanyue_reader.R;
+import com.example.fengdeyu.xuanyue_reader.activity.ReadActivity;
+import com.example.fengdeyu.xuanyue_reader.fragment.ReadPageFragment;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
+import com.example.fengdeyu.xuanyue_reader.other.MyReadInterface;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +37,7 @@ public class PageViewAdapter extends PageAdapter {
     Calendar mCalendar=Calendar.getInstance();
 
 
+    private ReadPageFragment fragment;
 
     public int battery;
     //注册广播接受者java代码
@@ -42,15 +46,18 @@ public class PageViewAdapter extends PageAdapter {
     BatteryReceiver receiver=new BatteryReceiver();
 
 
-    public PageViewAdapter(Context mContext,ArrayList<String> mList){
+    public PageViewAdapter(Context mContext, ArrayList<String> mList, ReadPageFragment fragment){
         this.mContext=mContext;
         this.mList=mList;
         am=mContext.getAssets();
+
+        this.fragment=fragment;
 
         mContext.registerReceiver(receiver,filter);
 
 
     }
+
 
 
 
@@ -77,6 +84,12 @@ public class PageViewAdapter extends PageAdapter {
         }
 
 
+
+    }
+
+    @Override
+    public void dataUpdate(int i) {
+        fragment.dataUpdate(i);
     }
 
     @Override

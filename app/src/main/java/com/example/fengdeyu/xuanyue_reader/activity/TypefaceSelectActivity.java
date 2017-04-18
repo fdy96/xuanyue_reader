@@ -57,6 +57,7 @@ public class TypefaceSelectActivity extends AppCompatActivity implements View.On
             case R.id.rl_typeface_1:
                 GetPageAttribute.getInstance().font_typeface="FZXH.TTF";
                 GetPageAttribute.getInstance().linespace=20;
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 iv_select_1.setBackgroundResource(R.mipmap.ic_checkbox_selected);
                 iv_select_2.setBackgroundResource(R.mipmap.ic_checkbox_normal);
                 iv_select_3.setBackgroundResource(R.mipmap.ic_checkbox_normal);
@@ -64,6 +65,7 @@ public class TypefaceSelectActivity extends AppCompatActivity implements View.On
             case R.id.rl_typeface_2:
                 GetPageAttribute.getInstance().font_typeface="FZYBKS.TTF";
                 GetPageAttribute.getInstance().linespace=7;
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 iv_select_2.setBackgroundResource(R.mipmap.ic_checkbox_selected);
                 iv_select_1.setBackgroundResource(R.mipmap.ic_checkbox_normal);
                 iv_select_3.setBackgroundResource(R.mipmap.ic_checkbox_normal);
@@ -71,6 +73,7 @@ public class TypefaceSelectActivity extends AppCompatActivity implements View.On
             case R.id.rl_typeface_3:
                 GetPageAttribute.getInstance().font_typeface="HYBS.ttf";
                 GetPageAttribute.getInstance().linespace=20;
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 iv_select_3.setBackgroundResource(R.mipmap.ic_checkbox_selected);
                 iv_select_1.setBackgroundResource(R.mipmap.ic_checkbox_normal);
                 iv_select_2.setBackgroundResource(R.mipmap.ic_checkbox_normal);

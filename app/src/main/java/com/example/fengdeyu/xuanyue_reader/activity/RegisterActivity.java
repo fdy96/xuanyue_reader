@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -24,7 +27,20 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btn_backLogin;
     private Button btn_register;
 
-    String urlAddress = "http://10.128.228.39:8080/LoginAndRegister/RegisterServlet";
+    String urlAddress = "http://10.0.2.2:8080/XuanyueReaderServer/RegisterServlet";
+
+    public String cnToUnicode(String str){
+        String result="";
+        for (int i = 0; i < str.length(); i++){
+            int chr1 = (char) str.charAt(i);
+            if(chr1>=19968&&chr1<=171941){//汉字范围 \u4e00-\u9fa5 (中文)
+                result+="\\u" + Integer.toHexString(chr1);
+            }else{
+                result+=str.charAt(i);
+            }
+        }
+        return result;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getUrl = urlAddress + "?username=" + name.getText().toString() + "&password=" + psd.getText().toString();
+                String getUrl = urlAddress + "?username=" + cnToUnicode(name.getText().toString()) + "&password=" + cnToUnicode(psd.getText().toString());
+                Log.i("info",getUrl);
                 new RegisterAsyncTask().execute(getUrl);
 
             }
@@ -62,26 +79,36 @@ public class RegisterActivity extends AppCompatActivity {
             Document doc= null;
             try {
                 doc = Jsoup.connect(params[0]).get();
+                return doc.text();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-            return doc.text();
+            return "404";
 
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if(s.equals("true")){
-                Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
-                RegisterActivity.this.finish();
+            if(!s.equals("404")) {
+                try {
+                    if (new JSONObject(s).getBoolean("register")) {
+                        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
 
-            }else{
-                Toast.makeText(RegisterActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        RegisterActivity.this.finish();
+
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                Toast.makeText(RegisterActivity.this, "连接服务器失败！", Toast.LENGTH_SHORT).show();
             }
         }
     }

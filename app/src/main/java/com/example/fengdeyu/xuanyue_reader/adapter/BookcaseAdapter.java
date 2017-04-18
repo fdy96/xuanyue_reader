@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
 import com.example.fengdeyu.xuanyue_reader.other.DownloadServer;
+import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.ImageLoader;
 
 import java.util.List;
@@ -61,14 +62,25 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
 
     @Override
     public void onBindViewHolder(final BookcaseAdapter.bookcaseViewHolder holder, final int position) {
-        holder.book_icon.setImageResource(R.mipmap.book_icon);
+        //holder.book_icon.setImageResource(R.mipmap.book_icon);
         if(!mList.get(position).bookIconUrl.equals("")) {
-            new ImageLoader().showImageByThread(holder.book_icon, mList.get(position).bookIconUrl);
-            Log.i("info","true");
+            ImageLoader.getInstance().showImageByThread(holder.book_icon, mList.get(position).bookIconUrl);
         }
         holder.book_title.setText(mList.get(position).bookTitle);
         holder.book_author.setText(mList.get(position).bookAuthor);
         holder.book_content.setText(mList.get(position).bookContent);
+
+        Log.i("notifydatechanged",GetBookCase.getInstance().mList.get(position).currentChapter+"");
+
+        if(GetBookCase.getInstance().mList.get(position).currentChapter!=0){
+            int i=(int)((GetBookCase.getInstance().mList.get(position).currentChapter/(float)GetBookCase.getInstance().mList.get(position).mChapterList.size())*100);
+
+
+
+
+            holder.tv_proceed.setText("已阅读"+i+"%");
+        }
+
 
         // 设置内容view的大小为屏幕宽度,这样按钮就正好被挤出屏幕外
         ViewGroup.LayoutParams lp = holder.ll_item_view.getLayoutParams();
@@ -190,6 +202,7 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
         public TextView book_title;
         public TextView book_author;
         public TextView book_content;
+        public TextView tv_proceed;
         public LinearLayout ll_item_view;
         public HorizontalScrollView hsv;
         public LinearLayout ll_bookcase_manager;
@@ -205,6 +218,7 @@ public class BookcaseAdapter extends RecyclerView.Adapter<BookcaseAdapter.bookca
             book_title= (TextView) itemView.findViewById(R.id.tv_book_title);
             book_author= (TextView) itemView.findViewById(R.id.tv_book_author);
             book_content= (TextView) itemView.findViewById(R.id.tv_book_content);
+            tv_proceed= (TextView) itemView.findViewById(R.id.tv_proceed);
             ll_item_view= (LinearLayout) itemView.findViewById(R.id.ll_item_view);
             hsv= (HorizontalScrollView) itemView.findViewById(R.id.hsv);
             ll_bookcase_manager= (LinearLayout) itemView.findViewById(R.id.ll_bookcase_manager);

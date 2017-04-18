@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="3"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#8b0000"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="8dp"
+            android:src="@mipmap/ab_back"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+
+        <TextView
+            android:layout_width="122dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:text="反馈"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:layout_weight="1" />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#555555"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:text="我遇到的问题"
+        android:textSize="18sp"
+        android:paddingLeft="18dp"
+        android:background="#e8e8e8"
+        />
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/button_1"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="书籍无法阅读"
+            android:background="#c8c8c8"
+
+            />
+        <Button
+            android:id="@+id/button_2"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="空章乱码"
+            android:background="#c8c8c8"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/button_3"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="重复内容或章节出错"
+            android:background="#c8c8c8"
+            />
+        <Button
+            android:id="@+id/button_4"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="缓存失败"
+            android:background="#c8c8c8"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:text="反馈内容"
+        android:textSize="18sp"
+        android:paddingLeft="18dp"
+        android:background="#e8e8e8"
+        />
+    <EditText
+        android:id="@+id/et_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:hint="请描述您所遇到的问题，我们将尽快解决"
+        android:textColorHint="#c8c8c8"
+        android:gravity="top"
+        android:background="#ffffff"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:text="联系方式"
+        android:textSize="18sp"
+        android:paddingLeft="18dp"
+        android:background="#e8e8e8"
+        />
+    <EditText
+        android:id="@+id/et_contact"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:hint="请输入您的qq号或手机号码"
+        android:textColorHint="#c8c8c8"
+        android:gravity="top"
+        android:background="#ffffff"
+        />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#8b0000"
+        android:text="提交"
+        android:textSize="24sp"
+        android:textColor="#ffffff"
+        />
+
+
+
+
+
+
+</LinearLayout>

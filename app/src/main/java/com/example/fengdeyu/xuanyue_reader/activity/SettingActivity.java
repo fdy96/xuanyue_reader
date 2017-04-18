@@ -3,13 +3,17 @@ package com.example.fengdeyu.xuanyue_reader.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
+import com.example.fengdeyu.xuanyue_reader.dialog.EditTextDialog;
 
 public class SettingActivity extends AppCompatActivity {
 
     private ImageView iv_back;
+    private EditTextDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -25,5 +29,11 @@ public class SettingActivity extends AppCompatActivity {
         });
 
 
+
+
     }
+
+
+
+
 }

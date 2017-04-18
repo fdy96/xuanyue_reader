@@ -2,24 +2,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:title="我的消息"/>
-        <item
-            android:id="@+id/nav_messages"
-            android:title="同步书架"/>
 
+        <item
+            android:icon="@mipmap/ic_upload"
+            android:id="@+id/item_upload"
+            android:title="上传书架"
+            />
+
+        <item
+            android:icon="@mipmap/item_scan_book"
+            android:id="@+id/item_scan_book"
+            android:title="扫描本地书籍"/>
+        <item
+            android:icon="@mipmap/item_feedback"
+            android:id="@+id/item_feedback"
+            android:title="意见反馈"/>
+        <item
+            android:icon="@mipmap/item_setting"
+            android:id="@+id/item_date_clean"
+            android:title="清除缓存"
+            />
+
+        <!--<item-->
+            <!--android:icon="@mipmap/item_setting"-->
+            <!--android:id="@+id/item_setting"-->
+            <!--android:title="设置"/>-->
     </group>
 
-    <item android:title="">
-        <menu>
-            <item
-                android:id="@+id/setting"
-                android:title="设置"/>
-            <item
-                android:title="夜间模式"/>
-            <item
-                android:title="关于我们"/>
-        </menu>
-    </item>
+    <!--<item android:title="">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/setting"-->
+                <!--android:title="设置"/>-->
+            <!--<item-->
+                <!--android:title="夜间模式"/>-->
+            <!--<item-->
+                <!--android:title="关于我们"/>-->
+        <!--</menu>-->
+    <!--</item>-->
 </menu>

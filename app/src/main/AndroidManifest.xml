@@ -5,10 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -36,7 +37,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SearchResultActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            />
         <activity
             android:name=".activity.BookIntroActivity"
             android:screenOrientation="portrait" />
@@ -77,7 +80,22 @@
         <activity
             android:name=".other.TestPagingActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
-        <activity android:name=".activity.TypefaceSelectActivity" />
+        <activity
+            android:name=".activity.TypefaceSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FindCategoryResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FindCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FindRanklistActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.PersonalCenterActivity"></activity>
     </application>
 
 </manifest>

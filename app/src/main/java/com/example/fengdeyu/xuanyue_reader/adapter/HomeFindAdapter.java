@@ -27,6 +27,14 @@ public class HomeFindAdapter extends RecyclerView.Adapter<HomeFindAdapter.homeFi
         this.mList = mList;
     }
 
+    public interface onItemClickListener{
+        void onItemClick(View view,int position);
+    }
+    private HomeFindAdapter.onItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(HomeFindAdapter.onItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener=mOnItemClickListener;
+    }
+
 
     @Override
     public homeFindViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,9 +44,20 @@ public class HomeFindAdapter extends RecyclerView.Adapter<HomeFindAdapter.homeFi
     }
 
     @Override
-    public void onBindViewHolder(homeFindViewHolder holder, int position) {
+    public void onBindViewHolder(final HomeFindAdapter.homeFindViewHolder holder, final int position) {
         holder.icon.setImageResource(mList.get(position).iconUrl);
         holder.itemName.setText(mList.get(position).itemName);
+
+        if(mOnItemClickListener!=null) {
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
+
+                }
+            });
+        }
 
 
     }

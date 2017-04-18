@@ -11,7 +11,6 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_margin="12dp"
-        android:background="@mipmap/home_find_rank"
         />
 
     <LinearLayout

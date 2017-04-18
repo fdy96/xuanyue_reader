@@ -1,12 +1,14 @@
 package com.example.fengdeyu.xuanyue_reader.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.example.fengdeyu.xuanyue_reader.adapter.BookcaseAdapter;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
+import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
 
 /**
  * Created by fengdeyu on 2016/11/23.
@@ -42,7 +45,7 @@ public class BookcaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        loadTestBook();
+//        loadTestBook();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
@@ -55,12 +58,15 @@ public class BookcaseFragment extends Fragment {
         bookcaseAdapter.setOnItemClickListener(new BookcaseAdapter.onItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                GetPageAttribute.getInstance().bookId=position;
+                GetPageAttribute.getInstance().source="book_case";
                 GetChapterContent.getInstance().currentChapter=GetBookCase.getInstance().mList.get(position).currentChapter;
                 GetChapterContent.getInstance().bookTitle=GetBookCase.getInstance().mList.get(position).bookTitle;
                 if(GetBookCase.getInstance().mList.get(position).bookAuthor.equals("本地")){
+                    GetPageAttribute.getInstance().isChanged=true;
                     startActivity(new Intent(getActivity(), ReadLocalBookActivity.class).putExtra("bookId",position).putExtra("intoWay","bookCase"));
                 }else{
+                    GetPageAttribute.getInstance().isChanged=true;
                     startActivity(new Intent(getActivity(), ReadActivity.class).putExtra("bookId",position).putExtra("intoWay","bookCase"));
                 }
             }
@@ -70,22 +76,31 @@ public class BookcaseFragment extends Fragment {
 
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+
+        if(bookcaseAdapter.getItemCount()==0){
+            mRecyclerView.setBackgroundResource(R.mipmap.ic_no_book);
+        }else{
+            mRecyclerView.setBackgroundResource(R.color.cardview_light_background);
+        }
+
         bookcaseAdapter.notifyDataSetChanged();
 
 
-
     }
+
+
 
     private void loadTestBook(){
         final BookItemBean bookItemBean=new BookItemBean();
         bookItemBean.bookTitle="仙逆";
         bookItemBean.bookAuthor="作者:  耳根";
         bookItemBean.bookContent="最新章节:新书--我欲封天";
-        bookItemBean.bookHref="http://www.23us.so/files/article/html/10/10674/index.html";
-        bookItemBean.bookIconUrl="http://www.23us.so/files/article/image/10/10674/10674s.jpg";
+        bookItemBean.bookHref="http://www.biquge.com.tw/3_3067/";
+        bookItemBean.bookIconUrl="http://www.biquge.com.tw/files/article/image/3/3067/3067s.jpg";
         if(!GetBookCase.getInstance().hasBook(bookItemBean)){
             GetBookCase.getInstance().mList.add(bookItemBean);
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="修改用户名"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        />
+    <View
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#c8c8c8"
+        />
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_edittext_bg"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:weightSum="2"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        >
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="取消"
+            android:background="#ffffff"
+            android:onClick="onClickDialog"
+            />
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:background="#c8c8c8"
+            />
+        <Button
+            android:id="@+id/btn_ok_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="确定"
+            android:background="#ffffff"
+            android:onClick="onClickDialog"
+            />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

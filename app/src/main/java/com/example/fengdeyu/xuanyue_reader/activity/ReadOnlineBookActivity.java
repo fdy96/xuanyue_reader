@@ -102,6 +102,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         tv_day_night.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if(GetPageAttribute.getInstance().day_night.equals("day")) {
                     GetPageAttribute.getInstance().bg_theme = 0xff000000;
                     GetPageAttribute.getInstance().textColor = 0xffeeeeee;
@@ -137,6 +138,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         iv_screen_rotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);// 横屏
                 }
@@ -158,6 +160,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         bg_theme_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xffffffff;
                 setDefaultFragment();
             }
@@ -165,6 +168,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         bg_theme_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xfffffaf0;
                 setDefaultFragment();
             }
@@ -172,6 +176,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         bg_theme_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xffc1ffc1;
                 setDefaultFragment();
             }
@@ -179,6 +184,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         bg_theme_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xffc9c9c9;
                 setDefaultFragment();
             }
@@ -254,6 +260,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         iv_font_size_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if(GetPageAttribute.getInstance().textSize==32){
                     GetPageAttribute.getInstance().textSize=32;
                 }else {
@@ -271,6 +278,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         iv_font_size_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if (GetPageAttribute.getInstance().textSize==10){
                     GetPageAttribute.getInstance().textSize=10;
                 }else {
@@ -316,6 +324,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         });
 
 
+        setDefaultFragment();
 
     }
 
@@ -332,19 +341,19 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
         super.onResume();
         String url;
 
-        if(setting.getBoolean("isChanged",false)) {
-
-
-            url = GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
-
-
-            GetPageAttribute.getInstance().rate= 0f;
-
-            new loadContentsAsyncTask().execute(url);
-
-            setting.edit().putBoolean("isChanged",false).commit();
-
-        }
+//        if(setting.getBoolean("isChanged",false)) {
+//
+//
+//            url = GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+//
+//
+//            GetPageAttribute.getInstance().rate= 0f;
+//
+//            new loadContentsAsyncTask().execute(url);
+//
+//            setting.edit().putBoolean("isChanged",false).commit();
+//
+//        }
 
 
 
@@ -353,7 +362,6 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        GetChapterContent.getInstance().clear();
     }
 
 
@@ -384,7 +392,7 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
             try {
 //                String contents="123";
                 Document doc= Jsoup.connect(params[0]).get();
-                String contents=doc.getElementById("contents").text();
+                String contents=doc.getElementById("content").text();
 //                Log.i("info",params[0]);
 //                Log.i("info",doc.toString());
                 return contents;

@@ -98,7 +98,7 @@
             android:id="@+id/iv_back"
             android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@mipmap/ab_back"
             android:layout_gravity="center_vertical"
             />
@@ -109,33 +109,33 @@
 
 
 
-        <TextView
-            android:layout_margin="16dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="朗读"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_margin="16dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="换源"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_margin="16dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="简介"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:layout_weight="1"/>
+        <!--<TextView-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="朗读"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="18sp"-->
+            <!--android:layout_weight="1"/>-->
+        <!--<TextView-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="换源"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="18sp"-->
+            <!--android:layout_weight="1"/>-->
+        <!--<TextView-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="简介"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="18sp"-->
+            <!--android:layout_weight="1"/>-->
 
 
     </LinearLayout>

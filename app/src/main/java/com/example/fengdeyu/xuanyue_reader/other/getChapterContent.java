@@ -34,11 +34,15 @@ public class GetChapterContent {
 
 
     public void loadChapterContent(String URL){
+
+        clear();
+
         //TODO:从网络上获取章节列表
 
         try {
             Document doc= Jsoup.connect(URL).get();
-            Elements links=doc.select("td.L");
+
+            Elements links=doc.select("dd");
             for(Element link:links){
                 ChapterContentBean chapterContentBean=new ChapterContentBean();
 
@@ -47,12 +51,10 @@ public class GetChapterContent {
 
                     if(!link.text().equals("")) {
                         chapterContentBean.chapter_name = link.text();
-                        chapterContentBean.chapter_url=href.attr("href");
+                        chapterContentBean.chapter_url="http://www.biquge.com.tw"+href.attr("href");
                         mList.add(chapterContentBean);
                     }
                 }
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.bean.BookItemBean;
+import com.example.fengdeyu.xuanyue_reader.dialog.LoadingDialog;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
+import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
 import com.example.fengdeyu.xuanyue_reader.other.ImageLoader;
 
 public class BookIntroActivity extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class BookIntroActivity extends AppCompatActivity {
     private ImageView bookIcon;
 
     private String bookHref;
+
+
+    private LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +66,16 @@ public class BookIntroActivity extends AppCompatActivity {
         bookHref=intent.getStringExtra("bookHref");
 
 
-
+        dialog=new LoadingDialog(BookIntroActivity.this);
+        dialog.show();
+        new loadChapterContentAsyncTask().execute(bookHref);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        new loadChapterContentAsyncTask().execute(bookHref);
+
     }
 
     public void init(){
@@ -92,14 +99,21 @@ public class BookIntroActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
+            dialog.dismiss();
+
+
 
             btn_start_read.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(BookIntroActivity.this,ReadOnlineBookActivity.class);
-                    GetChapterContent.getInstance().currentChapter=0;
-                    GetChapterContent.getInstance().bookTitle=getIntent().getStringExtra("bookTitle");
-                    startActivity(intent);
+                    if(GetPageAttribute.getInstance().isNetworkConnected(BookIntroActivity.this)) {
+                        Intent intent = new Intent(BookIntroActivity.this, ReadOnlineBookActivity.class);
+                        GetPageAttribute.getInstance().source = "book_intro";
+                        GetChapterContent.getInstance().currentChapter = 0;
+                        GetChapterContent.getInstance().bookTitle = getIntent().getStringExtra("bookTitle");
+                        GetPageAttribute.getInstance().isChanged = true;
+                        startActivity(intent);
+                    }
                 }
             });
             btn_add_book.setOnClickListener(new View.OnClickListener() {
@@ -111,12 +125,11 @@ public class BookIntroActivity extends AppCompatActivity {
                     bookItemBean.bookContent=getIntent().getStringExtra("bookContent");
                     bookItemBean.bookIconUrl=getIntent().getStringExtra("bookIconUrl");
                     bookItemBean.bookHref=getIntent().getStringExtra("bookHref");
-//                    for(int i=0;i<GetChapterContent.getInstance().mList.size();i++){
-//                        bookItemBean.mChapterList.add(GetChapterContent.getInstance().mList.get(i));
-//                    }
-
                     if(GetBookCase.getInstance().hasBook(bookItemBean)){
                         Toast.makeText(BookIntroActivity.this,"此书已在书架,请勿重复添加!",Toast.LENGTH_SHORT).show();
+                    }else if(!GetPageAttribute.getInstance().isNetworkConnected(BookIntroActivity.this))
+                    {
+                        Toast.makeText(BookIntroActivity.this,"加入书架失败", Toast.LENGTH_SHORT).show();
                     }else {
                         GetBookCase.getInstance().mList.add(bookItemBean);
                         new Thread(){

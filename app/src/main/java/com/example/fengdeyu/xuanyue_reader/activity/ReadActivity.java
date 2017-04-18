@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.example.fengdeyu.xuanyue_reader.R;
 import com.example.fengdeyu.xuanyue_reader.fragment.ReadPageFragment;
 import com.example.fengdeyu.xuanyue_reader.fragment.ReadScrollFragment;
+import com.example.fengdeyu.xuanyue_reader.other.ContentsServer;
 import com.example.fengdeyu.xuanyue_reader.other.GetBookCase;
 import com.example.fengdeyu.xuanyue_reader.other.GetChapterContent;
 import com.example.fengdeyu.xuanyue_reader.other.GetPageAttribute;
@@ -128,6 +129,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         tv_day_night.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if(GetPageAttribute.getInstance().day_night.equals("day")) {
                     GetPageAttribute.getInstance().bg_theme = 0xff000000;
                     GetPageAttribute.getInstance().textColor = 0xffeeeeee;
@@ -162,6 +164,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         iv_screen_rotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);// 横屏
                 }
@@ -182,6 +185,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         bg_theme_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xffffffff;
                 setDefaultFragment();
 
@@ -190,6 +194,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         bg_theme_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xfffffaf0;
                 setDefaultFragment();
             }
@@ -197,6 +202,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         bg_theme_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xffc1ffc1;
                 setDefaultFragment();
             }
@@ -204,6 +210,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         bg_theme_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 GetPageAttribute.getInstance().bg_theme= 0xffc9c9c9;
                 setDefaultFragment();
             }
@@ -294,6 +301,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         iv_font_size_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if(GetPageAttribute.getInstance().textSize==32){
                     GetPageAttribute.getInstance().textSize=32;
                 }else {
@@ -311,6 +319,7 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         iv_font_size_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GetPageAttribute.getInstance().pageParamChanged=true;
                 if (GetPageAttribute.getInstance().textSize==10){
                     GetPageAttribute.getInstance().textSize=10;
                 }else {
@@ -367,10 +376,12 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         }
         timer.schedule(new MyTimerTask(),0,200);
 
+        setDefaultFragment();
 
     }
 
     private void setDefaultFragment() {
+
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         mRead = new ReadPageFragment();
@@ -381,25 +392,25 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
     @Override
     protected void onResume() {
         super.onResume();
-        String url;
-
-        if(setting.getBoolean("isChanged",false)) {
-
-
-            if (GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).isDownload) {
-                url = GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_local_url;
-            } else {
-                url = GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
-            }
-
-            GetPageAttribute.getInstance().rate=GetBookCase.getInstance().mList.get(bookId).rate;
-            GetBookCase.getInstance().mList.get(bookId).rate=0;
-
-            new loadContentsAsyncTask().execute(url);
-
-            setting.edit().putBoolean("isChanged",false).commit();
-
-        }
+//        String url;
+//
+//        if(setting.getBoolean("isChanged",false)) {
+//
+//
+//            if (GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).isDownload) {
+//                url = GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_local_url;
+//            } else {
+//                url = GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_url;
+//            }
+//
+//            GetPageAttribute.getInstance().rate=GetBookCase.getInstance().mList.get(bookId).rate;
+//            GetBookCase.getInstance().mList.get(bookId).rate=0;
+//
+//            new loadContentsAsyncTask().execute(url);
+//
+//            setting.edit().putBoolean("isChanged",false).commit();
+//
+//        }
 
 
         if (GetPageAttribute.getInstance().isDownloading&&ll_book_read_bottom.getVisibility()==View.VISIBLE){
@@ -411,13 +422,14 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         }
 
 
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        GetBookCase.getInstance().mList.get(bookId).currentChapter = GetChapterContent.getInstance().currentChapter;
+
         GetBookCase.getInstance().mList.get(bookId).rate=GetPageAttribute.getInstance().rate;
 
         GetChapterContent.getInstance().clear();
@@ -445,51 +457,14 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
         }
     }
 
-    private String read(String url) {
-        try {
-            FileInputStream inputStream=new FileInputStream(url);
-            byte[] bytes = new byte[1024];
-            ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-            while (inputStream.read(bytes) != -1) {
-                arrayOutputStream.write(bytes, 0, bytes.length);
-            }
-            inputStream.close();
-            arrayOutputStream.close();
-            String contents = new String(arrayOutputStream.toByteArray());
-
-            return contents;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
 
     public class loadContentsAsyncTask extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... params) {
-            if(getIntent().getStringExtra("intoWay").equals("bookCase")){
-                if(GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).isDownload)
-                {
-                return read(params[0]);
-                }
-            }
 
-            try {
-//                String contents="123";
-                Document doc= Jsoup.connect(params[0]).get();
-                String contents=doc.getElementById("contents").text();
-//                Log.i("info",params[0]);
-//                Log.i("info",doc.toString());
-                return contents;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
+            return new ContentsServer().loadContents(bookId);
+
         }
 
         @Override
@@ -497,15 +472,10 @@ public class ReadActivity extends AppCompatActivity implements MyReadInterface{
             super.onPostExecute(contents);
 
             if(contents!=null) {
-                 StringBuilder sb = new StringBuilder(contents);
-                int i = 0;
-                while (sb.indexOf(" ", i + 3) != -1) {
-                    i = sb.indexOf(" ", i + 3);
-                    sb.insert(i, "\n");
-                }
 
 
-                mContents=sb.toString();
+
+                mContents=contents;
 
                 GetPageAttribute.getInstance().contents=mContents;
                 GetPageAttribute.getInstance().chapterName=GetBookCase.getInstance().mList.get(bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_name;

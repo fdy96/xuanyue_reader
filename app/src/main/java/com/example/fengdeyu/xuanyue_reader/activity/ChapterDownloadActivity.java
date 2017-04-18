@@ -26,6 +26,8 @@ public class ChapterDownloadActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter_download);
 
+        GetPageAttribute.getInstance().isChanged=false;
+
         tv_download_type_1= (TextView) findViewById(R.id.tv_download_type_1);
         tv_download_type_1.setOnClickListener(new View.OnClickListener() {
             @Override
