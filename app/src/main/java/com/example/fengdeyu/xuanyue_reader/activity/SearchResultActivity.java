@@ -34,7 +34,7 @@ import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    private String urlAddress="http://zhannei.baidu.com/cse/search?q=";
+    private String urlAddress="http://zhannei.baidu.com/cse/search?s=10048850760735184192&entry=1&ie=gbk&q=";
     private EditText et_search;
 
     private RecyclerView bookItemView;
@@ -57,7 +57,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
 
 
-        String URL=urlAddress+cnToUnicode(et_search.getText().toString())+"&click=1&entry=1&s=8353527289636145615&nsid=";
+        String URL=urlAddress+cnToUnicode(et_search.getText().toString());
 
 
         bookItemView= (RecyclerView) findViewById(R.id.bookitem_recycler_view);
@@ -76,7 +76,7 @@ public class SearchResultActivity extends AppCompatActivity {
         iv_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL=urlAddress+cnToUnicode(et_search.getText().toString())+"&click=1&entry=1&s=8353527289636145615&nsid=";
+                String URL=urlAddress+cnToUnicode(et_search.getText().toString());
                 if(!hasData(et_search.getText().toString())) {
                     insertData(et_search.getText().toString());
                 }
