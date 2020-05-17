@@ -56,48 +56,39 @@ public class GetBookCase {
     public BookItemBean addBookByTitle(String bookTitle){
         BookItemBean bookItemBean=new BookItemBean();
 
-        String URL="http://zhannei.baidu.com/cse/search?q="+cnToUnicode(bookTitle)+"&click=1&entry=1&s=8353527289636145615&nsid=";
+        String URL="http://www.ltsw888.com/s.php?ie=gbk&q="+bookTitle;
         try {
             Document doc=Jsoup.connect(URL).get();
-            Elements links=doc.select("div.result-item");
+            Elements links=doc.select("div.bookbox");
             Element link=links.first();
 
-
-
-            Elements hrefs=link.select("div[onclick]");
-            for(Element href:hrefs){
-                String s1=href.attr("onclick");
-                String s2=s1.substring(s1.indexOf("'")+1,s1.lastIndexOf("'"));
-                String s3=s2.substring(s2.lastIndexOf("/")+1,s2.lastIndexOf("."));
-                String s4=s3.substring(0,s3.length()-3);
-                String s5="http://www.biquge.com.tw/"+s4+"_"+s3+"/";
-                Log.i("info",s5);
-
-
-                bookItemBean.bookHref=s5;//获取小说章节目录链接
-            }
-
-            Elements srcs=link.select("img[src]");
-            for(Element src:srcs){
-                String s1=src.attr("src");
-                bookItemBean.bookIconUrl=s1;//获取小说图片链接
-
-            }
-//
-            Elements titles=link.select(".result-item-title.result-game-item-title");
+            Elements titles=link.select("h4.bookname");
             for(Element title:titles){
                 String s1=title.text();
                 bookItemBean.bookTitle=s1;//获取小说名称
-
+                String href="http://www.ltsw888.com"+title.select("a").get(0).attr("href");
+                bookItemBean.bookHref=href;//获取小说链接
             }
 
-            Elements infos=link.select(".result-game-item-info-tag");
-            String s=infos.first().text().trim();
-            bookItemBean.bookAuthor=s;//获取小说作者
-            bookItemBean.bookContent=infos.get(1).text().trim();//获取小说最新章节
+            Elements imgs=link.select("img");
+            for(Element img:imgs){
+                String s1="http://www.ltsw888.com"+img.attr("src");
+                bookItemBean.bookIconUrl=s1;//获取小说封面
+            }
 
-            Log.i("inf0","bookHerf:"+bookItemBean.bookHref+"\nbookIconUrl:"+bookItemBean.bookIconUrl+"\nbookTitle:"+bookItemBean.bookTitle+
-                    "\nbooContent:"+bookItemBean.bookContent);
+            Elements authors=link.select("div.author");
+            for(Element author:authors){
+                String s1=author.text();
+                bookItemBean.bookAuthor=s1;//获取小说作者
+            }
+
+
+            Elements contents=link.select("div.update");
+            for(Element content:contents){
+                String s1=content.text();
+                bookItemBean.bookContent=s1;//获取小说最新章节
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -134,7 +125,7 @@ public class GetBookCase {
 
                     if (!link.text().equals("")) {
                         chapterContentBean.chapter_name = link.text();
-                        chapterContentBean.chapter_url="http://www.biquge.com.tw"+href.attr("href");
+                        chapterContentBean.chapter_url="http://www.ltsw888.com"+href.attr("href");
 
                         mList.get(pos).mChapterList.add(chapterContentBean);
                     }

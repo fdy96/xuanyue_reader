@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView tv_forget;
 
-    String urlAddress = "http://10.0.2.2:8080/XuanyueReaderServer/LoginServlet";
+    String urlAddress = "http://192.168.1.87:8080/XuanyueReaderServer/LoginServlet";
 
     public String cnToUnicode(String str){
         String result="";

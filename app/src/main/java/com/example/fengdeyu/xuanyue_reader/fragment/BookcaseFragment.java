@@ -96,11 +96,11 @@ public class BookcaseFragment extends Fragment {
 
     private void loadTestBook(){
         final BookItemBean bookItemBean=new BookItemBean();
-        bookItemBean.bookTitle="仙逆";
-        bookItemBean.bookAuthor="作者:  耳根";
-        bookItemBean.bookContent="最新章节:新书--我欲封天";
-        bookItemBean.bookHref="http://www.biquge.com.tw/3_3067/";
-        bookItemBean.bookIconUrl="http://www.biquge.com.tw/files/article/image/3/3067/3067s.jpg";
+        bookItemBean.bookTitle="诡秘之主";
+        bookItemBean.bookAuthor="作    者：爱潜水的乌贼";
+        bookItemBean.bookContent="最新章节：";
+        bookItemBean.bookHref="http://www.ltsw888.com/book_173/";
+        bookItemBean.bookIconUrl="http://www.ltsw888.com/files/article/image/0/173/173s.jpg";
         if(!GetBookCase.getInstance().hasBook(bookItemBean)){
             GetBookCase.getInstance().mList.add(bookItemBean);
 

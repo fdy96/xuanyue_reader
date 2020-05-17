@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btn_backLogin;
     private Button btn_register;
 
-    String urlAddress = "http://10.0.2.2:8080/XuanyueReaderServer/RegisterServlet";
+    String urlAddress = "http://192.168.1.87:8080/XuanyueReaderServer/RegisterServlet";
 
     public String cnToUnicode(String str){
         String result="";

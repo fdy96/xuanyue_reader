@@ -37,6 +37,8 @@ import com.example.fengdeyu.xuanyue_reader.other.MyReadInterface;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -392,9 +394,10 @@ public class ReadOnlineBookActivity extends AppCompatActivity implements MyReadI
             try {
 //                String contents="123";
                 Document doc= Jsoup.connect(params[0]).get();
-                String contents=doc.getElementById("content").text();
+                //String contents=doc.getElementById("content").text();
+                String contents=doc.select("div.showtxt").get(0).text();
 //                Log.i("info",params[0]);
-//                Log.i("info",doc.toString());
+                Log.i("txt",contents);
                 return contents;
             } catch (IOException e) {
                 e.printStackTrace();

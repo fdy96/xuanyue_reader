@@ -36,7 +36,7 @@ public class GetChapterContent {
     public void loadChapterContent(String URL){
 
         clear();
-
+        int i=0;
         //TODO:从网络上获取章节列表
 
         try {
@@ -44,16 +44,15 @@ public class GetChapterContent {
 
             Elements links=doc.select("dd");
             for(Element link:links){
+
                 ChapterContentBean chapterContentBean=new ChapterContentBean();
 
                 Elements hrefs=link.select("a[href]");
                 for(Element href:hrefs){
+                    chapterContentBean.chapter_name = href.text();
+                    chapterContentBean.chapter_url="http://www.ltsw888.com"+href.attr("href");
 
-                    if(!link.text().equals("")) {
-                        chapterContentBean.chapter_name = link.text();
-                        chapterContentBean.chapter_url="http://www.biquge.com.tw"+href.attr("href");
-                        mList.add(chapterContentBean);
-                    }
+                    mList.add(chapterContentBean);
                 }
             }
         } catch (IOException e) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,7 +35,8 @@ import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    private String urlAddress="http://zhannei.baidu.com/cse/search?s=10048850760735184192&entry=1&ie=gbk&q=";
+    //private String urlAddress="http://zhannei.baidu.com/cse/search?s=10048850760735184192&entry=1&i%e=gbk&q=";
+    private String urlAddress="http://www.ltsw888.com/s.php?ie=gbk&q=";
     private EditText et_search;
 
     private RecyclerView bookItemView;
@@ -57,7 +59,9 @@ public class SearchResultActivity extends AppCompatActivity {
 
 
 
-        String URL=urlAddress+cnToUnicode(et_search.getText().toString());
+
+//        String URL=urlAddress+cnToUnicode(et_search.getText().toString());
+        String URL=urlAddress+et_search.getText().toString();
 
 
         bookItemView= (RecyclerView) findViewById(R.id.bookitem_recycler_view);
@@ -76,7 +80,7 @@ public class SearchResultActivity extends AppCompatActivity {
         iv_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL=urlAddress+cnToUnicode(et_search.getText().toString());
+                String URL=urlAddress+et_search.getText().toString();
                 if(!hasData(et_search.getText().toString())) {
                     insertData(et_search.getText().toString());
                 }
@@ -178,84 +182,146 @@ public class SearchResultActivity extends AppCompatActivity {
 
 
 
-    class ConnectAsyncTask extends AsyncTask<String,Void,List<BookItemBean>> {
-
-
-        @Override
-        protected List<BookItemBean> doInBackground(String... params) {
-            List<BookItemBean> mList=new ArrayList<>();
-
-
-
-
-            try {
-
-                Document doc= Jsoup.connect(params[0]).get();
-
-                Elements intros=doc.select(".result-game-item-desc");
-                for(Element intro:intros){
-                    String s1=intro.text();
-                    bookIntro.add(s1);
-                }
-
-
-                Elements links=doc.select("div.result-item");
-                for (Element link:links){
-                    BookItemBean bookItemBean=new BookItemBean();
-
-
-                    Elements hrefs=link.select("div[onclick]");
-                    for(Element href:hrefs){
-                        String s1=href.attr("onclick");
-                        String s2=s1.substring(s1.indexOf("'")+1,s1.lastIndexOf("'"));
-                        String s3=s2.substring(s2.lastIndexOf("/")+1,s2.lastIndexOf("."));
-                        String s4;
-                        if(s3.length()<4){
-                            s4="0";
-                        }else {
-                            s4 = s3.substring(0, s3.length() - 3);
-                        }
-                        String s5="http://www.biquge.com.tw/"+s4+"_"+s3+"/";
-
-
-                        bookItemBean.bookHref=s5;//获取小说章节目录链接
-                    }
-
-                    Elements srcs=link.select("img[src]");
-                    for(Element src:srcs){
-                        String s1=src.attr("src");
-                        bookItemBean.bookIconUrl=s1;//获取小说图片链接
-
-                    }
+//    class ConnectAsyncTask extends AsyncTask<String,Void,List<BookItemBean>> {
 //
-                    Elements titles=link.select(".result-item-title.result-game-item-title");
-                    for(Element title:titles){
-                        String s1=title.text();
-                        bookItemBean.bookTitle=s1;//获取小说名称
+//
+//        @Override
+//        protected List<BookItemBean> doInBackground(String... params) {
+//            List<BookItemBean> mList=new ArrayList<>();
+//
+//
+//
+//
+//            try {
+//
+//                Document doc= Jsoup.connect(params[0]).get();
+//
+//                Elements intros=doc.select(".result-game-item-desc");
+//                for(Element intro:intros){
+//                    String s1=intro.text();
+//                    bookIntro.add(s1);
+//                }
+//
+//
+//                Elements links=doc.select("div.result-item");
+//                for (Element link:links){
+//                    BookItemBean bookItemBean=new BookItemBean();
+//
+//
+//                    Elements hrefs=link.select("div[onclick]");
+//                    for(Element href:hrefs){
+//                        String s1=href.attr("onclick");
+//                        String s2=s1.substring(s1.indexOf("'")+1,s1.lastIndexOf("'"));
+//                        String s3=s2.substring(s2.lastIndexOf("/")+1,s2.lastIndexOf("."));
+//                        String s4;
+//                        if(s3.length()<4){
+//                            s4="0";
+//                        }else {
+//                            s4 = s3.substring(0, s3.length() - 3);
+//                        }
+//                        String s5="http://www.biquge.com.tv/"+s4+"_"+s3+"/";
+//
+//
+//                        bookItemBean.bookHref=s5;//获取小说章节目录链接
+//                    }
+//
+//                    Elements srcs=link.select("img[src]");
+//                    for(Element src:srcs){
+//                        String s1=src.attr("src");
+//                        bookItemBean.bookIconUrl=s1;//获取小说图片链接
+//
+//                    }
+////
+//                    Elements titles=link.select(".result-item-title.result-game-item-title");
+//                    for(Element title:titles){
+//                        String s1=title.text();
+//                        bookItemBean.bookTitle=s1;//获取小说名称
+//
+//                    }
+//
+//                    Elements infos=link.select(".result-game-item-info-tag");
+//                    String s=infos.first().text().trim();
+//                    bookItemBean.bookAuthor=s;//获取小说作者
+//                    bookItemBean.bookContent=infos.get(1).text().trim();//获取小说最新章节
+//
+//
+//
+//                    mList.add(bookItemBean);
+//
+//
+//
+//                }
+//
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//            return mList;
+//        }
 
+        class ConnectAsyncTask extends AsyncTask<String,Void,List<BookItemBean>> {
+
+
+            @Override
+            protected List<BookItemBean> doInBackground(String... params) {
+                List<BookItemBean> mList=new ArrayList<>();
+
+
+                try {
+
+                    Document doc= Jsoup.connect(params[0]).get();
+
+                    Elements links=doc.select("div.bookbox");
+                    for (Element link:links){
+                        BookItemBean bookItemBean=new BookItemBean();
+
+
+                        Elements titles=link.select("h4.bookname");
+                        for(Element title:titles){
+                            String s1=title.text();
+                            bookItemBean.bookTitle=s1;//获取小说名称
+                            String href="http://www.ltsw888.com"+title.select("a").get(0).attr("href");
+                            bookItemBean.bookHref=href;//获取小说链接
+                        }
+
+                        Elements imgs=link.select("img");
+                        for(Element img:imgs){
+                            String s1="http://www.ltsw888.com"+img.attr("src");
+                            bookItemBean.bookIconUrl=s1;//获取小说封面
+                        }
+
+                        Elements authors=link.select("div.author");
+                        for(Element author:authors){
+                            String s1=author.text();
+                            bookItemBean.bookAuthor=s1;//获取小说作者
+                        }
+
+
+                        Elements contents=link.select("div.update");
+                        for(Element content:contents){
+                            String s1=content.text();
+                            bookItemBean.bookContent=s1;//获取小说最新章节
+                        }
+
+                        Elements intros=link.select("p");
+                        for(Element intro:intros){
+                            String s1=intro.text();
+                            bookIntro.add(s1);//获取小说简介
+                        }
+
+                        mList.add(bookItemBean);
                     }
 
-                    Elements infos=link.select(".result-game-item-info-tag");
-                    String s=infos.first().text().trim();
-                    bookItemBean.bookAuthor=s;//获取小说作者
-                    bookItemBean.bookContent=infos.get(1).text().trim();//获取小说最新章节
 
-
-
-                    mList.add(bookItemBean);
-
-
-
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                return mList;
             }
-
-
-            return mList;
-        }
 
 
 
@@ -291,7 +357,9 @@ public class SearchResultActivity extends AppCompatActivity {
         for (int i = 0; i < str.length(); i++){
             int chr1 = (char) str.charAt(i);
             if(chr1>=19968&&chr1<=171941){//汉字范围 \u4e00-\u9fa5 (中文)
-                result+="\\u" + Integer.toHexString(chr1);
+//                result+="\\u" + Integer.toHexString(chr1);
+                result+= Integer.toBinaryString(chr1);
+
             }else{
                 result+=str.charAt(i);
             }

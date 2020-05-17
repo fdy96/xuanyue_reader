@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         super.run();
-                                        String url = "http://10.0.2.2:8080/XuanyueReaderServer/UpdateBookServlet?uid=" + GetUserInfo.getInstance().userInfo.uid;
+                                        String url = "http://192.168.1.87:8080/XuanyueReaderServer/UpdateBookServlet?uid=" + GetUserInfo.getInstance().userInfo.uid;
                                         Connection conn = Jsoup.connect(url);
 
                                         Map<String, Object> book = new HashMap<String, Object>();
@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 super.run();
-                                String url = "http://10.0.2.2:8080/XuanyueReaderServer/LoadBookServlet?uid=" + GetUserInfo.getInstance().userInfo.uid;
+                                String url = "http://192.168.1.87:8080/XuanyueReaderServer/LoadBookServlet?uid=" + GetUserInfo.getInstance().userInfo.uid;
                                 try {
                                     Document doc = Jsoup.connect(url).get();
                                     JSONObject bookObj = new JSONObject(doc.text());

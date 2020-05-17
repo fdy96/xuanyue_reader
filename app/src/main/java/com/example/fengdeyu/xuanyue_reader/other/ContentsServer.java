@@ -2,6 +2,7 @@ package com.example.fengdeyu.xuanyue_reader.other;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -54,7 +55,7 @@ public class ContentsServer {
         Document doc= null;
         try {
             doc = Jsoup.connect(url).get();
-            contents=doc.getElementById("content").text();
+            contents=doc.select("div.showtxt").get(0).text();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -177,7 +178,7 @@ public class ContentsServer {
                             temp = "";
                             lines = 0;
                         }
-                        temp += "  ";
+                        //temp += "  ";
                         pos = 1;
                         startInd = i +1;
                     }

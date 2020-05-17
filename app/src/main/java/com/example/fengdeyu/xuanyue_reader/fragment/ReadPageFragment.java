@@ -146,6 +146,7 @@ public class ReadPageFragment extends Fragment implements MyPageInterface {
                         GetPageAttribute.getInstance().contents = new ContentsServer().loadContents(GetPageAttribute.getInstance().bookId);
                         GetPageAttribute.getInstance().chapterName = GetBookCase.getInstance().mList.get(GetPageAttribute.getInstance().bookId).mChapterList.get(GetChapterContent.getInstance().currentChapter).chapter_name;
                     } else if (GetPageAttribute.getInstance().source.equals("book_intro")) {
+                        Log.i("love","ss"+GetChapterContent.getInstance().mList.get(0));
                         GetPageAttribute.getInstance().contents = new ContentsServer().loadContents(GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_url);
                         GetPageAttribute.getInstance().chapterName = GetChapterContent.getInstance().mList.get(GetChapterContent.getInstance().currentChapter).chapter_name;
                     }
@@ -158,7 +159,8 @@ public class ReadPageFragment extends Fragment implements MyPageInterface {
 
     public ArrayList<String> split(String text, int length, String encoding) throws UnsupportedEncodingException {
         ArrayList<String> texts = new ArrayList();
-        String temp = "   ";
+        //String temp = "   ";
+        String temp = "";
         String c;
         int lines = 0;
         int pos = 2;
@@ -202,7 +204,7 @@ public class ReadPageFragment extends Fragment implements MyPageInterface {
                         temp = "";
                         lines = 0;
                     }
-                    temp += "  ";
+                    //temp += "  ";
                     pos = 1;
                     startInd = i +1;
                 }

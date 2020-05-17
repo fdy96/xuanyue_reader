@@ -90,6 +90,7 @@ public class BookIntroActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... params) {
+
             GetChapterContent.getInstance().loadChapterContent(params[0]);
 
             return null;

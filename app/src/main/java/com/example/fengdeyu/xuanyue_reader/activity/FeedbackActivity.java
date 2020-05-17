@@ -90,7 +90,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void run() {
                         super.run();
-                        String url="http://10.0.2.2:8080/XuanyueReaderServer/FeedbackServlet";
+                        String url="http://192.168.1.87:8080/XuanyueReaderServer/FeedbackServlet";
                         Connection conn= Jsoup.connect(url);
 
                         conn.data("feedback",new JSONObject(feedback).toString());

@@ -140,7 +140,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements View.On
                     public void run() {
                         super.run();
                         String flag="false";
-                        String url="http://10.0.2.2:8080/XuanyueReaderServer/UpdateUserInfoServlet";
+                        String url="http://192.168.1.87:8080/XuanyueReaderServer/UpdateUserInfoServlet";
                         Connection conn= Jsoup.connect(url);
 
                         conn.data("user_info",new Gson().toJson(userInfoBean));
